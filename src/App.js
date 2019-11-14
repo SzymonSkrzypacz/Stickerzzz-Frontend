@@ -1,16 +1,18 @@
 import React from 'react';
 import './App.css';
-import SignIn from './components/SignIn.js';
+//import SignIn from './components/SignIn.js';
+import NavBar from './components/NavBar';
+import Card from './components/Card';
 
 function App() {
   return (
     <>
-      <header className='App-header'>
-        <p>
-          <code>Stickerzzz frontend</code>
-        </p>
-      </header>
-      <SignIn />
+      <NavBar />
+      {/* <SignIn /> */}
+      <Card />
+      <Card />
+      <Card />
+      <Card />
     </>
   );
 }
