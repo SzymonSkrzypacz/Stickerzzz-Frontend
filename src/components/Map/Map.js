@@ -16,15 +16,17 @@ export default class Map extends Component {
       zoomControl: false
     });
 
-    L.titleLayer(
-      'https://{s}.tile.thunderforest.com/mobile-atlas/{z}/{x}/{y}.png?apikey={AIzaSyAMdups_1NnJ9aJMgPEeKfwF_2Alpg42ck}',
+    L.tileLayer(
+      'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}',
       {
-        maxZoom: 18
+        minZoom: 0,
+        maxZoom: 18,
+        ext: 'png'
       }
     ).addTo(this.map);
   }
 
   render() {
-    return <Wrapper width='1280px' height='720px' id='map' />;
+    return <Wrapper width='800px' height='300px' id='map' />;
   }
 }

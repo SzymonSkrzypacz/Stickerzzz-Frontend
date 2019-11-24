@@ -124,7 +124,9 @@ export default function Post() {
         <EditPostModal />
       </CardActions>
       <Collapse in={expanded} timeout='auto' unmountOnExit>
-        <CardContent>{/* <Map /> */}</CardContent>
+        <CardContent>
+          <Map />
+        </CardContent>
       </Collapse>
     </Card>
   );
