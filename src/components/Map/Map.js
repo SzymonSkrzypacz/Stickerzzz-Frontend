@@ -9,18 +9,25 @@ const Wrapper = styled.div`
 `;
 
 export default class Map extends Component {
+  // showLocation(position) {
+  //   return [position.coords.latitude, position.coords.longitude];
+  // }
+
   componentDidMount() {
+    // navigator.geolocation.getCurrentPosition(function(position) {
+    //   console.log(position.coords.latitude, position.coords.longitude);
+    // });
     this.map = L.map('map', {
-      center: [58, 16],
-      zoom: 6,
+      center: [51.21006, 16.1619],
+      zoom: 15,
       zoomControl: false
     });
 
     L.tileLayer(
-      'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}',
+      'https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png',
       {
-        minZoom: 0,
-        maxZoom: 18,
+        minZoom: 5,
+        maxZoom: 17,
         ext: 'png'
       }
     ).addTo(this.map);
