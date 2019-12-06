@@ -24,6 +24,8 @@ import ReportIcon from '@material-ui/icons/Report';
 import DeleteIcon from '@material-ui/icons/Delete';
 import TextField from '@material-ui/core/TextField';
 
+import { Link } from 'react-router-dom';
+
 import Map from '../../map/Map';
 
 import EditPostModal from '../editPostModal/EditPostModal';
@@ -34,10 +36,14 @@ const useStyles = makeStyles(theme => ({
     margin: '20px auto',
     border: 'none',
     boxShadowColor: '#3F51B5',
+    height: '100%',
   },
   media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
+    height: '100%',
+    width: '100%',
+    paddingTop: '56.25%',
+    backgroundSize: 'contain',
+    backgroundPosition: 'center',
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -69,8 +75,9 @@ export default function Post(props) {
     setExpanded(!expanded);
   };
 
-  const handleAvatarClick = () => {
-    console.log('klikniete');
+  const handleAvatarClick = e => {
+    e.preventDefault();
+    window.location.href = window.location.href + name;
   };
 
   const handleClick = () => {
@@ -91,12 +98,14 @@ export default function Post(props) {
     <Card className={classes.card}>
       <CardHeader
         avatar={
-          <Avatar
-            aria-label='recipe'
-            className={classes.avatar}
-            src={avatar}
-            onClick={handleAvatarClick}
-          />
+          <Link className={classes.navLinks} to={name}>
+            <Avatar
+              aria-label='recipe'
+              className={classes.avatar}
+              src={avatar}
+              // onClick={handleAvatarClick}
+            />
+          </Link>
         }
         action={
           <IconButton aria-label='delete' onClick={handleClick}>

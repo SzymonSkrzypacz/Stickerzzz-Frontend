@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
 import AdminDashboard from './components/adminDashboard/AdminDashboard';
-
 import Navbar from './components/navbar/Navbar';
 import PostList from './components/posts/postList/PostList';
+import Profile from './components/profile/Profile';
 
 class App extends Component {
   render() {
@@ -12,7 +12,8 @@ class App extends Component {
       <BrowserRouter>
         <Navbar />
         <Route exact path='/' component={PostList} />
-        <Route exact path='/adminDashboard' component={AdminDashboard} />
+        <Route path='/adminDashboard' component={AdminDashboard} />
+        <Route path='/user' component={Profile} />
       </BrowserRouter>
     );
   }
