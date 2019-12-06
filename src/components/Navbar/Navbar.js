@@ -12,21 +12,22 @@ import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 //import Button from '@material-ui/core/Button';
-import Register from './Register.js';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   title: {
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 }));
 
-export default function MenuAppBar() {
+export default function Navbar() {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -73,11 +74,10 @@ export default function MenuAppBar() {
           </Typography>
 
           {!auth && (
-            <div>
-              {/* <Button color='inherit'>Login</Button> */}
-
+            <>
+              <Login />
               <Register />
-            </div>
+            </>
           )}
           {auth && (
             <div>
@@ -95,12 +95,12 @@ export default function MenuAppBar() {
                 anchorEl={anchorEl}
                 anchorOrigin={{
                   vertical: 'top',
-                  horizontal: 'right'
+                  horizontal: 'right',
                 }}
                 keepMounted
                 transformOrigin={{
                   vertical: 'top',
-                  horizontal: 'right'
+                  horizontal: 'right',
                 }}
                 open={open}
                 onClose={handleClose}

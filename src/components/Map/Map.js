@@ -8,19 +8,19 @@ const Wrapper = styled.div`
   height: ${props => props.height};
 `;
 
-export default class Map extends Component {
-  // showLocation(position) {
-  //   return [position.coords.latitude, position.coords.longitude];
-  // }
+const myIcon = L.icon({
+  iconUrl: 'https://image.flaticon.com/icons/svg/447/447031.svg',
+  iconSize: [38, 95],
+  iconAnchor: [22, 94],
+  popupAnchor: [-3, -76],
+});
 
+export default class Map extends Component {
   componentDidMount() {
-    // navigator.geolocation.getCurrentPosition(function(position) {
-    //   console.log(position.coords.latitude, position.coords.longitude);
-    // });
     this.map = L.map('map', {
-      center: [51.21006, 16.1619],
+      center: this.props.position,
       zoom: 15,
-      zoomControl: false
+      zoomControl: false,
     });
 
     L.tileLayer(
@@ -28,9 +28,11 @@ export default class Map extends Component {
       {
         minZoom: 5,
         maxZoom: 17,
-        ext: 'png'
+        ext: 'png',
       }
     ).addTo(this.map);
+
+    L.marker(this.props.position, { icon: myIcon }).addTo(this.map);
   }
 
   render() {
