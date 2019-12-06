@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Post from '../Post/Post';
+import Post from '../post/Post';
 
 class PostList extends Component {
   state = {
@@ -44,8 +44,8 @@ class PostList extends Component {
   };
 
   render() {
-    return this.state.postList.map(postData => {
-      return <Post {...postData} />;
+    return this.state.postList.map((postData, key) => {
+      return <Post {...postData} key={key} />;
     });
   }
 }

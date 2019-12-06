@@ -11,9 +11,13 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-//import Button from '@material-ui/core/Button';
-import Login from '../Login/Login';
-import Register from '../Register/Register';
+import Button from '@material-ui/core/Button';
+import Login from '../auth/login/loginNav/LoginNav';
+import Register from '../auth/register/registerNav/RegisterNav';
+import { Link } from 'react-router-dom';
+
+import EditProfileModal from '../profile/EditProfileModal';
+import AddPost from '../posts/addPost/AddPost';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,16 +29,25 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
+  navLinks: {
+    color: 'white',
+    textDecoration: 'none',
+  },
 }));
 
-export default function Navbar() {
+const Navbar = () => {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
+  const [admin, setAdmin] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
   const handleChange = event => {
     setAuth(event.target.checked);
+  };
+
+  const handleChangeAdmin = event => {
+    setAdmin(event.target.checked);
   };
 
   const handleMenu = event => {
@@ -59,18 +72,27 @@ export default function Navbar() {
           label={auth ? 'Logout' : 'Login'}
         />
       </FormGroup>
+      {auth && (
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={admin}
+                onChange={handleChangeAdmin}
+                aria-label='login switch'
+              />
+            }
+            label={admin ? 'Brak admina' : 'Admin'}
+          />
+        </FormGroup>
+      )}
+
       <AppBar position='static'>
         <Toolbar>
-          {/* <IconButton
-            edge='start'
-            className={classes.menuButton}
-            color='inherit'
-            aria-label='menu'
-          > */}
-          {/* <MenuIcon /> */}
-          {/* </IconButton> */}
           <Typography variant='h6' className={classes.title}>
-            Stickerzzz
+            <Link className={classes.navLinks} to='/'>
+              Stickerzzz
+            </Link>
           </Typography>
 
           {!auth && (
@@ -79,8 +101,17 @@ export default function Navbar() {
               <Register />
             </>
           )}
+
           {auth && (
             <div>
+              <AddPost />
+              {admin && (
+                <Button>
+                  <Link className={classes.navLinks} to='/adminDashboard'>
+                    Admin Dashboard
+                  </Link>
+                </Button>
+              )}
               <IconButton
                 aria-label='account of current user'
                 aria-controls='menu-appbar'
@@ -90,6 +121,7 @@ export default function Navbar() {
               >
                 <AccountCircle />
               </IconButton>
+
               <Menu
                 id='menu-appbar'
                 anchorEl={anchorEl}
@@ -105,8 +137,9 @@ export default function Navbar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
+                <MenuItem onClick={handleClose}>
+                  <EditProfileModal />
+                </MenuItem>
                 <MenuItem onClick={handleClose}>Log out</MenuItem>
               </Menu>
             </div>
@@ -115,4 +148,6 @@ export default function Navbar() {
       </AppBar>
     </div>
   );
-}
+};
+
+export default Navbar;

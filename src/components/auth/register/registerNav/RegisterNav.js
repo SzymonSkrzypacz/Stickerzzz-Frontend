@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
-import SignIn from '../SignIn/SignIn';
+import SignUp from '../signUpModal/SignUpModal';
 
 function getModalStyle() {
   return {
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Login() {
+export default function Register() {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
@@ -40,7 +40,7 @@ export default function Login() {
   return (
     <div>
       <Button color='inherit' onClick={handleOpen}>
-        Login
+        Register
       </Button>
       {/* <button type='button' onClick={handleOpen}>
         Open Modal
@@ -52,7 +52,7 @@ export default function Login() {
         onClose={handleClose}
       >
         <div style={modalStyle} className={classes.paper}>
-          <SignIn />
+          <SignUp />
         </div>
       </Modal>
     </div>
