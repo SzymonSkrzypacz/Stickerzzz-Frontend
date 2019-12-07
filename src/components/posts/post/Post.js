@@ -75,11 +75,6 @@ export default function Post(props) {
     setExpanded(!expanded);
   };
 
-  const handleAvatarClick = e => {
-    e.preventDefault();
-    window.location.href = window.location.href + name;
-  };
-
   const handleClick = () => {
     setOpen(!open);
   };
@@ -94,11 +89,12 @@ export default function Post(props) {
   // console.log(props);
 
   const { avatar, name, date, image, tags, likes, position, shares } = props;
+  const link = '/user/' + name;
   return (
     <Card className={classes.card}>
       <CardHeader
         avatar={
-          <Link className={classes.navLinks} to={name}>
+          <Link className={classes.navLinks} to={link}>
             <Avatar
               aria-label='recipe'
               className={classes.avatar}

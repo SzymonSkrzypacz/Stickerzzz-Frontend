@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
-import SignUp from '../signUpModal/SignUpModal';
+import SignUpModal from '../signUpModal/SignUpModal';
 
 function getModalStyle() {
   return {
@@ -52,7 +52,7 @@ export default function Register() {
         onClose={handleClose}
       >
         <div style={modalStyle} className={classes.paper}>
-          <SignUp />
+          <SignUpModal />
         </div>
       </Modal>
     </div>

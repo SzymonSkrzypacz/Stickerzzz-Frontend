@@ -13,7 +13,7 @@ class App extends Component {
         <Navbar />
         <Route exact path='/' component={PostList} />
         <Route path='/adminDashboard' component={AdminDashboard} />
-        <Route path='/user' component={Profile} />
+        <Route path='/user/:user' component={Profile} />
       </BrowserRouter>
     );
   }
