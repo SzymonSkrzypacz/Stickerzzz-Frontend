@@ -37,12 +37,21 @@ class SignUpModal extends Component {
   state = {
     email: '',
     password: '',
+    reapeatPassword: '',
   };
 
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value,
     });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    if (this.state.password === this.state.reapeatPassword)
+      console.log('super!');
+    else console.log('zle hasła');
   };
 
   render() {
@@ -57,7 +66,11 @@ class SignUpModal extends Component {
           <Typography component='h1' variant='h5'>
             Sign up
           </Typography>
-          <form className={classes.form} noValidate>
+          <form
+            className={classes.form}
+            onSubmit={this.handleSubmit}
+            noValidate
+          >
             <TextField
               value={this.state.email}
               onChange={this.handleChange}
@@ -82,6 +95,20 @@ class SignUpModal extends Component {
               label='Password'
               type='password'
               id='password'
+              autoComplete='current-password'
+            />
+
+            <TextField
+              value={this.state.reapeatPassword}
+              onChange={this.handleChange}
+              variant='outlined'
+              margin='normal'
+              required
+              fullWidth
+              name='reapeatPassword'
+              label='Reapeat Password'
+              type='password'
+              id='reapeatPassword'
               autoComplete='current-password'
             />
 
