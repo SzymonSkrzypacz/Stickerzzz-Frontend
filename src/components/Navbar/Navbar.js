@@ -15,7 +15,7 @@ import Login from '../Auth/Login/LoginNav/LoginNav';
 import Register from '../Auth/Register/RegisterNav/RegisterNav';
 import { Link } from 'react-router-dom';
 
-import EditProfileModal from '../Profile/EditProfileModal';
+import EditProfileModal from '../profile/EditProfileModal';
 import AddPost from '../Posts/AddPost/AddPost';
 
 const useStyles = makeStyles(theme => ({
