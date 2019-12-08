@@ -26,9 +26,9 @@ import TextField from '@material-ui/core/TextField';
 
 import { Link } from 'react-router-dom';
 
-import Map from '../../map/Map';
+import Map from '../../Map/Map';
 
-import EditPostModal from '../editPostModal/EditPostModal';
+import EditPostModal from '../EditPostModal/EditPostModal';
 
 const useStyles = makeStyles(theme => ({
   card: {

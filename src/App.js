@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
-import AdminDashboard from './components/adminDashboard/AdminDashboard';
-import Navbar from './components/navbar/Navbar';
-import PostList from './components/posts/postList/PostList';
-import Profile from './components/profile/Profile';
+import AdminDashboard from './components/AdminDashboard/AdminDashboard';
+import Navbar from './components/Navbar/Navbar';
+import PostList from './components/Posts/PostList/PostList';
+import Profile from './components/Profile/Profile';
 
 class App extends Component {
   render() {
