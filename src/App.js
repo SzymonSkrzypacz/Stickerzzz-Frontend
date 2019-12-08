@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
-import AdminDashboard from './components/AdminDashboard/AdminDashboard';
+import AdminDashboard from './components/adminDashboard/AdminDashboard';
 import Navbar from './components/Navbar/Navbar';
 import PostList from './components/Posts/PostList/PostList';
 import Profile from './components/Profile/Profile';
