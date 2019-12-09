@@ -1,8 +1,8 @@
-import React from './node_modules/react';
-import { makeStyles } from './node_modules/@material-ui/core/styles';
-import Modal from './node_modules/@material-ui/core/Modal';
-import Button from './node_modules/@material-ui/core/Button';
-import SignUpModal from '../SignUpModal/SignUpModal';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
+import SignUpModal from '../signUpModal/SignUpModal';
 
 function getModalStyle() {
   return {

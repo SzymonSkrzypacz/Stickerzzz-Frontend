@@ -28,7 +28,7 @@ import { Link } from 'react-router-dom';
 
 import Map from '../../map/Map';
 
-import EditPostModal from '../editPostModal/EditPostModal';
+import EditPostModal from '../editPostModal/editPostModal';
 
 const useStyles = makeStyles(theme => ({
   card: {
