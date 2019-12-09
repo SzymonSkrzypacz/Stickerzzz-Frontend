@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React, { Component } from './node_modules/react';
+import Avatar from './node_modules/@material-ui/core/Avatar';
+import Button from './node_modules/@material-ui/core/Button';
+import CssBaseline from './node_modules/@material-ui/core/CssBaseline';
+import TextField from './node_modules/@material-ui/core/TextField';
+import LockOutlinedIcon from './node_modules/@material-ui/icons/LockOutlined';
+import Typography from './node_modules/@material-ui/core/Typography';
+import { withStyles } from './node_modules/@material-ui/core/styles';
+import Container from './node_modules/@material-ui/core/Container';
 
 const styles = theme => ({
   '@global': {
