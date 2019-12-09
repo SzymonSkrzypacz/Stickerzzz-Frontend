@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Post from '../post/Post';
 
-class PostList extends Component {
+class postList extends Component {
   state = {
     postList: [
       {
@@ -49,4 +49,4 @@ class PostList extends Component {
   }
 }
 
-export default PostList;
+export default postList;
