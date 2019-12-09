@@ -26,9 +26,9 @@ import TextField from '@material-ui/core/TextField';
 
 import { Link } from 'react-router-dom';
 
-import Map from '../../map/Map';
+import Map from '../../Map/Map';
 
-import EditPostModal from '../editPostModal/editPostModal';
+import EditPostModal from '../EditPostModal/EditPostModal';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -117,7 +117,7 @@ export default function Post(props) {
               </DialogTitle>
               <DialogContent>
                 <DialogContentText id='alert-dialog-description'>
-                  Pamiętaj, że zmiany nie da się cofnąć!
+                  Pamiętaj, że zmiany nie da się cofnąć!!!
                 </DialogContentText>
               </DialogContent>
               <DialogActions>

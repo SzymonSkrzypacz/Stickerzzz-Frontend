@@ -36,6 +36,6 @@ export default class Map extends Component {
   }
 
   render() {
-    return <Wrapper width='800px' height='300px' id='map' />;
+    return <Wrapper width='800px ' height='300px' id='map' />;
   }
 }

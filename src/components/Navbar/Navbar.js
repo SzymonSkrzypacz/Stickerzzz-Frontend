@@ -11,12 +11,12 @@ import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
-import Login from '../auth/login/loginNav/LoginNav';
-import Register from '../auth/register/registerNav/RegisterNav';
+import Login from '../Auth/Login/LoginNav/LoginNav';
+import Register from '../Auth/Register/RegisterNav/RegisterNav.js';
 import { Link } from 'react-router-dom';
 
-import EditProfileModal from '../profile/EditProfileModal';
-import AddPost from '../posts/addPost/AddPost';
+import EditProfileModal from '../Profile/EditProfileModal';
+import AddPost from '../Posts/AddPost/AddPost';
 
 const useStyles = makeStyles(theme => ({
   root: {

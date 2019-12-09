@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
-import adminDashboard from './components/adminDashboard/adminDashboard.js';
-import navbar from './components/navbar/navbar';
-import postList from './components/posts/postList/postList.js';
-import profile from './components/profile/profile';
+import AdminDashboard from './components/AdminDashboard/AdminDashboard.js';
+import Navbar from './components/Navbar/Navbar';
+import PostList from './components/Posts/PostList/PostList.js';
+import Profile from './components/Profile/Profile';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <navbar />
-        <Route exact path='/' component={postList} />
-        <Route path='/adminDashboard' component={adminDashboard} />
-        <Route path='/user/:user' component={profile} />
+        <Navbar />
+        <Route exact path='/' component={PostList} />
+        <Route path='/adminDashboard' component={AdminDashboard} />
+        <Route path='/user/:user' component={Profile} />
       </BrowserRouter>
     );
   }

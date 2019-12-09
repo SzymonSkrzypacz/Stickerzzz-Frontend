@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Post from '../post/Post';
+import Post from '../Post/Post';
 
-class postList extends Component {
+class PostList extends Component {
   state = {
     postList: [
       {
@@ -19,7 +19,7 @@ class postList extends Component {
       {
         avatar:
           'https://d-art.ppstatic.pl/kadry/k/r/c3/1e/54b14e9ae0d73_o_full.jpg',
-        name: 'Grażyna',
+        name: 'Grażynka',
         date: 'November 1, 2018',
         image:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNz7NfSIXNtI-LP99oY8SsVIFcnG8kImmW2lXmoHsMN7YDxeIJ&s',
@@ -49,4 +49,4 @@ class postList extends Component {
   }
 }
 
-export default postList;
+export default PostList;

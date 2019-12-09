@@ -46,7 +46,7 @@ export default function EditProfileModal() {
         onClose={handleClose}
       >
         <div style={modalStyle} className={classes.paper}>
-          <h2 id='simple-modal-title'>Edytuj profil</h2>
+          <h2 id='simple-modal-title'>Edytuj swój profil</h2>
         </div>
       </Modal>
     </>

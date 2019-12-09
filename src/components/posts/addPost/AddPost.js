@@ -7,7 +7,7 @@ function getModalStyle() {
   return {
     top: `50%`,
     left: `50%`,
-    transform: `translate(-50%, -50%)`,
+    transform: `translate( -50%, -50%)`,
   };
 }
 
@@ -49,7 +49,7 @@ export default function AddPost() {
         onClose={handleClose}
       >
         <div style={modalStyle} className={classes.paper}>
-          <h2 id='simple-modal-title'>Dodaj post</h2>
+          <h2 id='simple-modal-title'>Dodaj nowy post</h2>
         </div>
       </Modal>
     </>

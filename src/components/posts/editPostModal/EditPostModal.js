@@ -50,7 +50,7 @@ export default function EditPostModal() {
         onClose={handleClose}
       >
         <div style={modalStyle} className={classes.paper}>
-          <h2 id='simple-modal-title'>Edytuj post</h2>
+          <h2 id='simple-modal-title'>Edytuj swój post</h2>
         </div>
       </Modal>
     </div>
