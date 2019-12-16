@@ -5,9 +5,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
+// import Switch from '@material-ui/core/Switch';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
@@ -36,18 +36,18 @@ const useStyles = makeStyles(theme => ({
 
 const Navbar = () => {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
-  const [admin, setAdmin] = React.useState(true);
+  // const [auth, setAuth] = React.useState(true);
+  // const [admin, setAdmin] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
-  const handleChange = event => {
-    setAuth(event.target.checked);
-  };
+  // const handleChange = event => {
+  //   setAuth(event.target.checked);
+  // };
 
-  const handleChangeAdmin = event => {
-    setAdmin(event.target.checked);
-  };
+  // const handleChangeAdmin = event => {
+  //   setAdmin(event.target.checked);
+  // };
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
@@ -59,7 +59,7 @@ const Navbar = () => {
 
   return (
     <div className={classes.root}>
-      <FormGroup>
+      {/* <FormGroup>
         <FormControlLabel
           control={
             <Switch
@@ -84,7 +84,7 @@ const Navbar = () => {
             label={admin ? 'Brak admina' : 'Admin'}
           />
         </FormGroup>
-      )}
+          )} */}
 
       <AppBar position='static'>
         <Toolbar>
@@ -94,55 +94,55 @@ const Navbar = () => {
             </Link>
           </Typography>
 
-          {!auth && (
-            <>
-              <Login />
-              <Register />
-            </>
-          )}
+          {/* {!auth && ( */}
+          <>
+            <Login />
+            <Register />
+          </>
+          {/* )} */}
 
-          {auth && (
-            <div>
-              <AddPost />
-              {admin && (
-                <Button>
-                  <Link className={classes.navLinks} to='/adminDashboard'>
-                    Admin Dashboard
+          {/* {auth && ( */}
+          <div>
+            <AddPost />
+            {/* {admin && ( */}
+            <Button>
+              <Link className={classes.navLinks} to='/adminDashboard'>
+                Admin Dashboard
                   </Link>
-                </Button>
-              )}
-              <IconButton
-                aria-label='account of current user'
-                aria-controls='menu-appbar'
-                aria-haspopup='true'
-                onClick={handleMenu}
-                color='inherit'
-              >
-                <AccountCircle />
-              </IconButton>
+            </Button>
+            {/* )} */}
+            <IconButton
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
+              onClick={handleMenu}
+              color='inherit'
+            >
+              <AccountCircle />
+            </IconButton>
 
-              <Menu
-                id='menu-appbar'
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>
-                  <EditProfileModal />
-                </MenuItem>
-                <MenuItem onClick={handleClose}>Log out</MenuItem>
-              </Menu>
-            </div>
-          )}
+            <Menu
+              id='menu-appbar'
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={open}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>
+                <EditProfileModal />
+              </MenuItem>
+              <MenuItem onClick={handleClose}>Log out</MenuItem>
+            </Menu>
+          </div>
+
         </Toolbar>
       </AppBar>
     </div>

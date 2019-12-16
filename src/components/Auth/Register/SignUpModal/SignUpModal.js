@@ -7,6 +7,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import axios from 'axios';
+import apiUrl from '../../../../config/cfg';
 
 const styles = theme => ({
   '@global': {
@@ -38,6 +40,7 @@ class signUpModal extends Component {
     email: '',
     password: '',
     reapeatPassword: '',
+    userName: '',
   };
 
   handleChange = e => {
@@ -49,9 +52,21 @@ class signUpModal extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    if (this.state.password === this.state.reapeatPassword)
-      console.log('super!');
-    else console.log('zle hasła');
+    if (this.state.password === this.state.reapeatPassword) {
+      axios.post(`${apiUrl}api/Users`, {
+        "user": {
+          "userName": this.state.userName,
+          "email": this.state.email,
+          "password": this.state.password,
+        }
+      })
+        .then(function (res) {
+          console.log(res);
+        }).catch(function (err) {
+          console.log(err);
+        });
+    } else console.log('inne hasła');
+
   };
 
   render() {
@@ -71,6 +86,7 @@ class signUpModal extends Component {
             onSubmit={this.handleSubmit}
             noValidate
           >
+
             <TextField
               value={this.state.email}
               onChange={this.handleChange}
@@ -83,6 +99,17 @@ class signUpModal extends Component {
               name='email'
               autoComplete='email'
               autoFocus
+            />
+            <TextField
+              value={this.state.userName}
+              onChange={this.handleChange}
+              variant='outlined'
+              margin='normal'
+              required
+              fullWidth
+              id='userName'
+              label='User Name'
+              name='userName'
             />
             <TextField
               value={this.state.password}
@@ -109,7 +136,6 @@ class signUpModal extends Component {
               label='Reapeat Password'
               type='password'
               id='reapeatPassword'
-              autoComplete='current-password'
             />
 
             <Button
