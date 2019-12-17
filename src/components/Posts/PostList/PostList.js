@@ -5,11 +5,18 @@ import { connect } from 'react-redux';
 class PostList extends Component {
   state = {
     postList: [...this.props.posts],
+  
   };
 
   render() {
     return this.state.postList.map((postData, key) => {
-      return <Post {...postData} key={key} />;
+      return (
+        <>
+          <Post {...postData} key={key}/>
+          
+        </>
+      );
+
     });
   }
 }

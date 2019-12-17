@@ -7,8 +7,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import axios from 'axios';
-import apiUrl from '../../../../config/cfg';
+import { signUp } from '../../../../store/actions/authActions';
+import { green } from '@material-ui/core/colors';
+
+import { connect } from 'react-redux';
+
 
 const styles = theme => ({
   '@global': {
@@ -33,6 +36,9 @@ const styles = theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  success: {
+    backgroundColor: green[600],
+  },
 });
 
 class signUpModal extends Component {
@@ -52,22 +58,12 @@ class signUpModal extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    if (this.state.password === this.state.reapeatPassword) {
-      axios.post(`${apiUrl}api/Users`, {
-        "user": {
-          "userName": this.state.userName,
-          "email": this.state.email,
-          "password": this.state.password,
-        }
-      })
-        .then(function (res) {
-          console.log(res);
-        }).catch(function (err) {
-          console.log(err);
-        });
-    } else console.log('inne hasła');
-
+    if (this.state.email && this.state.password && this.state.password && this.state.password === this.state.reapeatPassword) {
+      this.props.signUp(this.state)   
+    }
   };
+  
+
 
   render() {
     const { classes } = this.props;
@@ -84,7 +80,7 @@ class signUpModal extends Component {
           <form
             className={classes.form}
             onSubmit={this.handleSubmit}
-            noValidate
+
           >
 
             <TextField
@@ -126,6 +122,7 @@ class signUpModal extends Component {
             />
 
             <TextField
+
               value={this.state.reapeatPassword}
               onChange={this.handleChange}
               variant='outlined'
@@ -137,7 +134,7 @@ class signUpModal extends Component {
               type='password'
               id='reapeatPassword'
             />
-
+            {(this.props.authError ? (<Typography color='error' variant='body1'>Wypełnij poprawnie dane</Typography>) : null)}
             <Button
               type='submit'
               fullWidth
@@ -154,4 +151,17 @@ class signUpModal extends Component {
   }
 }
 
-export default withStyles(styles)(signUpModal);
+const mapDispatchToProps = dispatch => {
+  return {
+    signUp: user => dispatch(signUp(user)),
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    authError: state.auth.authError,
+    alert: state.auth.alert
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(signUpModal));

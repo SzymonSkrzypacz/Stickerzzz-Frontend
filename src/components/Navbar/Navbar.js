@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -10,13 +11,14 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 // import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Login from '../Auth/Login/LoginNav/LoginNav';
 import Register from '../Auth/Register/RegisterNav/RegisterNav.js';
 import { Link } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 import EditProfileModal from '../Profile/EditProfileModal';
 import AddPost from '../Posts/AddPost/AddPost';
+import { signOut } from '../../store/actions/authActions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,20 +36,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Navbar = () => {
+const Navbar = ({ user, admin, logOut }) => {
   const classes = useStyles();
-  // const [auth, setAuth] = React.useState(true);
-  // const [admin, setAdmin] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
-  // const handleChange = event => {
-  //   setAuth(event.target.checked);
-  // };
-
-  // const handleChangeAdmin = event => {
-  //   setAdmin(event.target.checked);
-  // };
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
@@ -59,32 +52,6 @@ const Navbar = () => {
 
   return (
     <div className={classes.root}>
-      {/* <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={auth}
-              onChange={handleChange}
-              aria-label='login switch'
-            />
-          }
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup>
-      {auth && (
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={admin}
-                onChange={handleChangeAdmin}
-                aria-label='login switch'
-              />
-            }
-            label={admin ? 'Brak admina' : 'Admin'}
-          />
-        </FormGroup>
-          )} */}
 
       <AppBar position='static'>
         <Toolbar>
@@ -94,23 +61,26 @@ const Navbar = () => {
             </Link>
           </Typography>
 
-          {/* {!auth && ( */}
+          {!user && (
           <>
             <Login />
             <Register />
           </>
-          {/* )} */}
+          )}
 
-          {/* {auth && ( */}
+          
           <div>
+          {user && (
             <AddPost />
-            {/* {admin && ( */}
+          )}
+           {/* {admin && ( 
             <Button>
               <Link className={classes.navLinks} to='/adminDashboard'>
                 Admin Dashboard
                   </Link>
             </Button>
-            {/* )} */}
+           )} */}
+           {user && (
             <IconButton
               aria-label='account of current user'
               aria-controls='menu-appbar'
@@ -120,7 +90,7 @@ const Navbar = () => {
             >
               <AccountCircle />
             </IconButton>
-
+            )}
             <Menu
               id='menu-appbar'
               anchorEl={anchorEl}
@@ -139,7 +109,10 @@ const Navbar = () => {
               <MenuItem onClick={handleClose}>
                 <EditProfileModal />
               </MenuItem>
-              <MenuItem onClick={handleClose}>Log out</MenuItem>
+              <MenuItem onClick={()=>{
+                logOut();
+                handleClose();
+              }}>Log out</MenuItem>
             </Menu>
           </div>
 
@@ -149,4 +122,19 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user,
+    admin: state.auth.admin
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logOut: () => dispatch(signOut()),
+  }
+  
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
