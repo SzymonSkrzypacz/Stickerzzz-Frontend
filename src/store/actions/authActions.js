@@ -54,3 +54,9 @@ export const signUp = (newUser) => {
 export const closeAlert = (dispatch) => {
     return dispatch({ type: 'CLOSE_ALERT' });
 }
+
+export const clearError = (dispatch) => {
+    return (dispatch, getState) => {
+                dispatch({ type: 'CLEAR_ERROR' })
+        };
+}

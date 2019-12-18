@@ -7,8 +7,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { signUp } from '../../../../store/actions/authActions';
-import { errorPassword, correctPassword } from '../../../../store/actions/validateActions';
+import { signUp, clearError } from '../../../../store/actions/authActions';
+import { errorPassword, correctPassword, errorEmail, correctEmail, errorUserName, correctUserName } from '../../../../store/actions/validateActions';
 import { green } from '@material-ui/core/colors';
 
 import { connect } from 'react-redux';
@@ -43,7 +43,7 @@ const styles = theme => ({
 });
 
 const input_fields = {
-  userName: /^[a-z\d]{5,12}$/i,
+  userName: /^[a-z\d]{5,25}$/i,
   email: /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/, //eslint-disable-line
   password: /^[#\w@_-]{8,20}$/,
 }
@@ -60,9 +60,19 @@ class signUpModal extends Component {
     this.setState({
       [e.target.name]: e.target.value,
     });
-    
-    if(!(this.validate(e.target.value, input_fields[e.target.attributes.name.value]))) this.props.errorPassword('Hasło niezgodne z polityką haseł!')
-    else this.props.correctPassword();
+    this.props.clearError();
+    if(e.target.attributes.name.value !== 'reapeatPassword'){
+      if(!(this.validate(e.target.value, input_fields[e.target.attributes.name.value])) && e.target.value !== '' ){ 
+          if(e.target.attributes.name.value === 'password') this.props.errorPassword('Hasło niezgodne z polityką haseł!')
+          else if(e.target.attributes.name.value === 'email') this.props.errorEmail('Niepoprawny email!')
+          else if(e.target.attributes.name.value === 'userName') this.props.errorUserName('Niepoprawna nazwa użytkownika!')
+        }
+      else {
+          if(e.target.attributes.name.value === 'password') this.props.correctPassword();
+          else if(e.target.attributes.name.value === 'email') this.props.correctEmail();
+          else if(e.target.attributes.name.value === 'userName') this.props.correctUserName();
+      }
+    }
   };
 
   validate = (field, regex) => {
@@ -71,17 +81,17 @@ class signUpModal extends Component {
   
   handleSubmit = e => {
     e.preventDefault();
-
-    if (this.state.email && this.state.password && this.state.password > 8 && this.state.password === this.state.reapeatPassword) {
-      this.props.signUp(this.state)   
-    } 
+    this.props.signUp(this.state)   
+    console.log('wysłano')
   };
   
   
  
 
   render() {
-    const { classes, authError,passwordError } = this.props;
+    const { classes, authError, passwordError, emailError, userNameError } = this.props;
+    // console.log(emailError !== '' || userNameError !== '' || passwordError !== '' || this.state.password !== this.state.reapeatPassword)
+    console.log(authError)
     return (
       <Container component='main' maxWidth='xs'>
         <CssBaseline />
@@ -102,7 +112,7 @@ class signUpModal extends Component {
               value={this.state.email}
               onChange={this.handleChange}
               variant='outlined'
-              error={authError === 'Email' ? true : false}
+              error = { authError === 'Email' || emailError !== '' ? true : false}
               margin='normal'
               required
               fullWidth
@@ -111,13 +121,13 @@ class signUpModal extends Component {
               name='email'
               autoComplete='email'
               autoFocus
-              helperText= {authError === 'Email' ? 'Podany email jest zajęty' : null}
+              helperText= {authError === 'Email' || emailError !== '' ? 'Zły email' : null}
             />
 
             <TextField
               value={this.state.userName}
               onChange={this.handleChange}
-              error= {authError === 'Username' ? true : false}
+              error= {authError === 'Username' || userNameError !== '' ? true : false}
               variant='outlined'
               margin='normal'
               required
@@ -125,14 +135,14 @@ class signUpModal extends Component {
               id='userName'
               label='User Name'
               name='userName'
-              helperText= {authError === 'Username' ? 'Podany nazwa użytkownika jest zajęta' : null}
+              helperText= {authError === 'Username' || userNameError !== '' ? 'Zła nazwa użytkownika' : null}
             />
             <TextField
               value={this.state.password}
               onChange={this.handleChange}
               variant='outlined'
               // error = {(this.state.password.length <= 8 && this.state.password !== '') ? true : false}
-              error = {  passwordError !== '' ? true : false}
+              error = { passwordError ? true : false}
               margin='normal'
               required
               fullWidth
@@ -158,15 +168,16 @@ class signUpModal extends Component {
               label='Reapeat Password'
               type='password'
               id='reapeatPassword'
-              helperText= {this.state.password === this.state.reapeatPassword ? null : 'Wpisz takie same hasła'}
+              helperText= {(this.state.password === this.state.reapeatPassword) ? null : 'Wpisz takie same hasła'}
             />
-            {(this.props.authError ? (<Typography color='error' variant='body1'>Wypełnij poprawnie dane</Typography>) : null)}
+            {(authError ? (<Typography color='error' variant='body1'>Wypełnij poprawnie dane</Typography>) : null)}
             <Button
               type='submit'
               fullWidth
               variant='contained'
               color='primary'
               className={classes.submit}
+              disabled = { emailError !== '' || userNameError !== '' || passwordError !== '' || this.state.password !== this.state.reapeatPassword || authError !== null}
             >
               Sign Up
             </Button>
@@ -180,8 +191,13 @@ class signUpModal extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     signUp: user => dispatch(signUp(user)),
-    errorPassword: password => dispatch(errorPassword(password)),
-    correctPassword: () => dispatch(correctPassword())
+    errorPassword: err => dispatch(errorPassword(err)),
+    correctPassword: () => dispatch(correctPassword()),
+    errorEmail: (err) => dispatch(errorEmail(err)), 
+    correctEmail: () => dispatch(correctEmail()), 
+    errorUserName: (err) => dispatch(errorUserName(err)), 
+    correctUserName: () => dispatch(correctUserName()),
+    clearError: () => dispatch(clearError()),
   }
 }
 
@@ -190,8 +206,8 @@ const mapStateToProps = state => {
     authError: state.auth.authError,
     emailError: state.validate.emailError,
     userNameError: state.validate.userNameError,
-    passwordError: state.validate.passwordErrorError,
-    reapetedPasswordError: state.validate.reapetedPasswordErrorError,
+    passwordError: state.validate.passwordError,
+    //reapetedPasswordError: state.validate.reapetedPasswordError,
   }
 }
 

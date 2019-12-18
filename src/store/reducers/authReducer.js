@@ -43,6 +43,11 @@ const authReducer = (state = initState, action) => {
         ...state,
         authError: Object.keys(action.err.response.data.errors)[0],
       }
+    case 'CLEAR_ERROR':
+      return {
+        ...state,
+        authError: null,
+      }
 
     default:
       return state
