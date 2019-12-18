@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import SignUpModal from '../SignUpModal/SignUpModal.js';
+import { switchRegisterModal } from '../../../../store/actions/modalsActions';
+import { connect } from 'react-redux';
 
 function getModalStyle() {
   return {
@@ -26,28 +28,28 @@ const useStyles = makeStyles(theme => ({
 function Register(props) {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
   
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
 
   const handleClose = () => {
-    setOpen(false);
+    props.switchRegisterModal();
   };
   
 
-
+console.log(props.registerModal)
   return (
     <div>
-      <Button color='inherit' onClick={handleOpen} >
+      <Button color='inherit' onClick={handleClose} >
         Register
       </Button>
       <Modal
         aria-labelledby='simple-modal-title'
         aria-describedby='simple-modal-description'
-        open={open}
+        open={props.registerModal}
         onClose={handleClose}
       >
         <div style={modalStyle} className={classes.paper}>
@@ -59,4 +61,18 @@ function Register(props) {
 }
 
 
-export default Register;
+const mapDispatchToProps = dispatch => {
+  return {
+    switchRegisterModal: () => (switchRegisterModal()), 
+    // switchLoginModal: () => (switchLoginModal())
+  }
+}
+
+const mapStateToProps = state => {
+  // console.log(state.modals.registerModal)
+  return {
+    registerModal: state.modals.registerModal,
+    // loginModal: state.modals.loginModal,
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
