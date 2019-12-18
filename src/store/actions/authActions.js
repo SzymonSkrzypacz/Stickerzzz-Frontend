@@ -40,10 +40,10 @@ export const signUp = (newUser) => {
             }
         })
             .then(function (res) {
-                dispatch({ type: 'SIGNUP_SUCCESS' });
+                dispatch({ type: 'SIGNUP_SUCCESS', res });
                 return true
             }).catch(function (err) {
-                console.log(err.message)
+                //console.log(err.message)
                 dispatch({ type: 'SIGNUP_ERROR', err });
                 return false
             });

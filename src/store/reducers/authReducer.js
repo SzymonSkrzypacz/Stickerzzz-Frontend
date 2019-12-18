@@ -32,15 +32,16 @@ const authReducer = (state = initState, action) => {
       }
 
     case 'SIGNUP_SUCCESS':
-
+      console.log(action.res)
       return {
         ...state,
+        // user: action.res.user,
         authError: null,
       }
     case 'SIGNUP_ERROR':
       return {
         ...state,
-        authError: true,
+        authError: Object.keys(action.err.response.data.errors)[0],
       }
 
     default:
