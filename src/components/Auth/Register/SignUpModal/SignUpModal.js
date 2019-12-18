@@ -82,7 +82,7 @@ class signUpModal extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.signUp(this.state)   
-    console.log('wysłano')
+    //console.log('wysłano')
   };
   
   
@@ -91,7 +91,7 @@ class signUpModal extends Component {
   render() {
     const { classes, authError, passwordError, emailError, userNameError } = this.props;
     // console.log(emailError !== '' || userNameError !== '' || passwordError !== '' || this.state.password !== this.state.reapeatPassword)
-    console.log(authError)
+    //console.log(authError)
     return (
       <Container component='main' maxWidth='xs'>
         <CssBaseline />
@@ -105,7 +105,7 @@ class signUpModal extends Component {
           <form
             className={classes.form}
             onSubmit={this.handleSubmit}
-
+        
           >
 
             <TextField

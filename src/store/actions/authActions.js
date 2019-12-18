@@ -41,6 +41,9 @@ export const signUp = (newUser) => {
         })
             .then(function (res) {
                 dispatch({ type: 'SIGNUP_SUCCESS', res });
+                dispatch({ type: 'REGISTER_MODAL_SWITCH', payload: false });
+                dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true });
+                dispatch({ type: 'LOGIN_SUCCESS', res });
                 return true
             }).catch(function (err) {
                 //console.log(err.message)

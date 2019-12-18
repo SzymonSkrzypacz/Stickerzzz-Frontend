@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import SignUpModal from '../SignUpModal/SignUpModal.js';
-import { switchRegisterModal } from '../../../../store/actions/modalsActions';
+import { switchRegisterModalOpen, switchRegisterModalClose } from '../../../../store/actions/modalsActions';
 import { connect } from 'react-redux';
 
 function getModalStyle() {
@@ -35,25 +35,27 @@ function Register(props) {
   //   setOpen(true);
   // };
 
-  const handleClose = () => {
-    props.switchRegisterModal();
-  };
+  // const handleClose = () => {
+   
+  //   props.switchRegisterModal();
+  //    console.log(props.registerModal)
+  // };
   
 
-console.log(props.registerModal)
+//console.log(props.registerModal)
   return (
     <div>
-      <Button color='inherit' onClick={handleClose} >
+      <Button color='inherit' onClick={props.switchRegisterModalOpen} >
         Register
       </Button>
       <Modal
         aria-labelledby='simple-modal-title'
         aria-describedby='simple-modal-description'
         open={props.registerModal}
-        onClose={handleClose}
+        onClose={props.switchRegisterModalClose}
       >
         <div style={modalStyle} className={classes.paper}>
-          <SignUpModal close={handleClose} popup={props.closeAlert}/>
+          <SignUpModal close={props.switchRegisterModalClose} />
         </div>
       </Modal>
     </div>
@@ -63,13 +65,14 @@ console.log(props.registerModal)
 
 const mapDispatchToProps = dispatch => {
   return {
-    switchRegisterModal: () => (switchRegisterModal()), 
+    switchRegisterModalClose: () => dispatch(switchRegisterModalOpen()), 
+    switchRegisterModalOpen: () => dispatch(switchRegisterModalClose()), 
     // switchLoginModal: () => (switchLoginModal())
   }
 }
 
 const mapStateToProps = state => {
-  // console.log(state.modals.registerModal)
+  //console.log(state)
   return {
     registerModal: state.modals.registerModal,
     // loginModal: state.modals.loginModal,
