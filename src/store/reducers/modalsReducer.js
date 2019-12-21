@@ -1,12 +1,12 @@
 const initState = {
     registerModal: false,
     loginModal: false,
-    registerNotification: false
-
+    registerNotification: false,
+    addPostModal: false
 }
 
 const modalsReducer = (state = initState, action) => {
-    console.log(action.type)
+    //console.log(action.type)
 switch (action.type) {
     case 'REGISTER_MODAL_SWITCH':
       //console.log(action.payload);
@@ -24,6 +24,11 @@ switch (action.type) {
     return {
         ...state,
         registerNotification: action.payload
+    }
+    case 'ADD_POST_MODAL_SWITCH':
+    return {
+        ...state,
+        addPostModal: action.payload
     }
 
     default:

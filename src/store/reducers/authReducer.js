@@ -15,7 +15,7 @@ const authReducer = (state = initState, action) => {
 
     case 'LOGIN_SUCCESS':
       localStorage.setItem('user', JSON.stringify(action.res.data.user));
-      console.log(JSON.parse(localStorage.getItem('user')));
+      //console.log(JSON.parse(localStorage.getItem('user')));
       return {
         ...state,
         authError: null,
@@ -32,7 +32,7 @@ const authReducer = (state = initState, action) => {
       }
 
     case 'SIGNUP_SUCCESS':
-      console.log(action.res)
+      //console.log(action.res)
       return {
         ...state,
         user: action.res.user,

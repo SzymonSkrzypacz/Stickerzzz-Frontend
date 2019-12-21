@@ -30,3 +30,17 @@ export const switchRegisterNotificationClose = () => {
                 dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: false })
         };
 }
+
+export const switchAddPostModalClose = () => {
+    //console.log('xd')
+    return (dispatch, getState) => {
+                dispatch({ type: 'ADD_POST_MODAL_SWITCH', payload: false })
+        };
+}
+
+export const switchAddPostModalOpen = () => {
+    //console.log('xd')
+    return (dispatch, getState) => {
+                dispatch({ type: 'ADD_POST_MODAL_SWITCH', payload: true })
+        };
+}

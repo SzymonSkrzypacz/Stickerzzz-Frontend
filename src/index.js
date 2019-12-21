@@ -27,7 +27,8 @@ firebase.initializeApp(firebaseConfig);
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(thunk)
+  applyMiddleware(thunk.withExtraArgument(window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())),
+  
 );
 
 const rrfProps = {
