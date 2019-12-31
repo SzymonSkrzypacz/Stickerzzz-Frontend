@@ -1,4 +1,4 @@
-const apiUrl = 'https://stickerzzzweb20191215092139.azurewebsites.net/';
+const apiUrl = 'https://immense-oasis-44540.herokuapp.com/';
 
 
 

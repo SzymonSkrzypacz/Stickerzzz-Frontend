@@ -23,6 +23,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import ReportIcon from '@material-ui/icons/Report';
 import DeleteIcon from '@material-ui/icons/Delete';
 import TextField from '@material-ui/core/TextField';
+import List from '@material-ui/core/List';
 
 import { Link } from 'react-router-dom';
 
@@ -88,8 +89,9 @@ export default function Post(props) {
   };
   // console.log(props);
 
-  const { avatar, name, date, image, tags, likes, position, shares } = props;
+  const { avatar, name, date, image, tags, likes, position, shares, id } = props;
   const link = '/user/' + name;
+  const postLink = '/post/' + id;
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -135,7 +137,9 @@ export default function Post(props) {
         subheader={date}
       />
 
-      <CardMedia className={classes.media} image={image} title='Paella dish' />
+      <Link to={postLink}>
+        <CardMedia className={classes.media} image={image} title='Paella dish' />
+      </Link>
       <CardContent>
         <Typography variant='body2' color='textSecondary' component='p'>
           {tags.join(' ')}
@@ -167,6 +171,9 @@ export default function Post(props) {
 
         <IconButton aria-label='report' onClick={handleReasonClick}>
           <ReportIcon />
+          <List className={classes.root}>
+          
+          </List>
           <Dialog
             open={openReason}
             onClose={handleClose}

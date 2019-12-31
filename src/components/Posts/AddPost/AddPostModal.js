@@ -64,7 +64,7 @@ render(){
             <LockOutlinedIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
-            Sign up
+            Add Post
           </Typography>
           <form
             className={classes.form}

@@ -11,6 +11,7 @@ const initState = {
       likes: 250,
       shares: 100,
       position: [51.21, 16.18],
+      id: 1,
     },
     {
       avatar:
@@ -23,6 +24,7 @@ const initState = {
       likes: 250,
       shares: 100,
       position: [51, 16],
+      id: 2,
     },
     {
       avatar: 'https://i.ytimg.com/vi/TqgIhSl-Gs0/hqdefault.jpg',
@@ -34,6 +36,7 @@ const initState = {
       likes: 250,
       shares: 100,
       position: [51.1, 16.2],
+      id: 3,
     },
   ],
 };

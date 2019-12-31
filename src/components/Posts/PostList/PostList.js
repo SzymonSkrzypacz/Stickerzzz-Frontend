@@ -6,7 +6,6 @@ import SimpleSnackbar from '../../Snackbar/Snackbar'
 class PostList extends Component {
   state = {
     postList: [...this.props.posts],
-  
   };
 
   render() {
