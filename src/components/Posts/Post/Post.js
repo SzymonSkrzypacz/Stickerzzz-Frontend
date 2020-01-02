@@ -92,6 +92,8 @@ export default function Post(props) {
   const { avatar, name, date, image, tags, likes, position, shares, id } = props;
   const link = '/user/' + name;
   const postLink = '/post/' + id;
+  //console.log(props)
+  //console.log(user);
   return (
     <Card className={classes.card}>
       <CardHeader

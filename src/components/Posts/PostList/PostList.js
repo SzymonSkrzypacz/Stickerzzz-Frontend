@@ -6,6 +6,7 @@ import SimpleSnackbar from '../../Snackbar/Snackbar'
 class PostList extends Component {
   state = {
     postList: [...this.props.posts],
+    user: this.props.user
   };
 
   render() {
@@ -22,7 +23,9 @@ class PostList extends Component {
 }
 
 const mapStateToProps = state => {
-  return { posts: state.posts.posts };
+  return { 
+    posts: state.posts.posts
+  };
 };
 
 export default connect(mapStateToProps)(PostList);

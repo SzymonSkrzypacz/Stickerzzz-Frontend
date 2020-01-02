@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import styled from 'styled-components';
+import ReactLeafletSearch from "react-leaflet-search";
 
 const Wrapper = styled.div`
   width: ${props => props.width};
   height: ${props => props.height};
 `;
+
+const SearchComponent = props => (
+    <ReactLeafletSearch />
+)
 
 const myIcon = L.icon({
   iconUrl: 'https://image.flaticon.com/icons/svg/447/447031.svg',
@@ -21,7 +26,8 @@ export default class Map extends Component {
       center: this.props.position,
       zoom: 15,
       zoomControl: false,
-    });
+      
+    }, SearchComponent());
 
     L.tileLayer(
       'https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png',
@@ -33,6 +39,7 @@ export default class Map extends Component {
     ).addTo(this.map);
 
     L.marker(this.props.position, { icon: myIcon }).addTo(this.map);
+    
   }
 
   render() {

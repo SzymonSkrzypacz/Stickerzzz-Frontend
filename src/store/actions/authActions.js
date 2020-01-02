@@ -12,6 +12,7 @@ export const signIn = (credentials) => {
         })
             .then(function (res) {
                 dispatch({ type: 'LOGIN_SUCCESS', res });
+                console.log(res);
                 return true
             }).catch(function (err) {
                 console.log(err.message)
