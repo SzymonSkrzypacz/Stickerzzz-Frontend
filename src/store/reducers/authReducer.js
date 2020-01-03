@@ -7,7 +7,6 @@ const initState = {
 const authReducer = (state = initState, action) => {
   switch (action.type) {
     case 'LOGIN_ERROR':
-      //console.log('login error');
       return {
         ...state,
         authError: 'Login failed'
@@ -23,7 +22,6 @@ const authReducer = (state = initState, action) => {
       }
 
     case 'SIGNOUT_SUCCESS':
-      // console.log('signout success');
       localStorage.removeItem('user');
       return {
         ...state,

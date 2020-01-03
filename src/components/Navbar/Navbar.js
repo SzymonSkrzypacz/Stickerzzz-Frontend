@@ -60,7 +60,11 @@ const Navbar = ({ user, admin, logOut }) => {
               Stickerzzz
             </Link>
           </Typography>
-
+          <Typography variant='h6' className={classes.title}>
+            <Link className={classes.navLinks} to='/postList'>
+              Posty
+            </Link>
+          </Typography>
           {!user && (
           <>
             <Login />
@@ -69,9 +73,20 @@ const Navbar = ({ user, admin, logOut }) => {
           )}
 
           
-          <div>
+          
           {user && (
-            <AddPost />
+            <>
+              <AddPost />
+              <IconButton
+                aria-label='account of current user'
+                aria-controls='menu-appbar'
+                aria-haspopup='true'
+                onClick={handleMenu}
+                color='inherit'
+              >
+                <AccountCircle />
+              </IconButton>
+            </>
           )}
            {/* {admin && ( 
             <Button>
@@ -80,17 +95,7 @@ const Navbar = ({ user, admin, logOut }) => {
                   </Link>
             </Button>
            )} */}
-           {user && (
-            <IconButton
-              aria-label='account of current user'
-              aria-controls='menu-appbar'
-              aria-haspopup='true'
-              onClick={handleMenu}
-              color='inherit'
-            >
-              <AccountCircle />
-            </IconButton>
-            )}
+           
             <Menu
               id='menu-appbar'
               anchorEl={anchorEl}
@@ -114,7 +119,7 @@ const Navbar = ({ user, admin, logOut }) => {
                 handleClose();
               }}>Log out</MenuItem>
             </Menu>
-          </div>
+          
 
         </Toolbar>
       </AppBar>

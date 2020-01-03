@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function SimpleSnackbar({ registerNotification, switchRegisterNotificationClose }) {
+function SimpleSnackbar({ registerNotification, registerNotificationText, switchRegisterNotificationClose }) {
   const classes = useStyles();
   //console.log(registerNotification)
   return (
@@ -35,7 +35,7 @@ function SimpleSnackbar({ registerNotification, switchRegisterNotificationClose 
         ContentProps={{
           'aria-describedby': 'add user notification',
         }}
-        message={<span id="message-id">Użytkownik został dodany!</span>}
+        message={<span id="message-id">{registerNotificationText}</span>}
         action={[
           <IconButton
             key="close"
@@ -56,6 +56,7 @@ function SimpleSnackbar({ registerNotification, switchRegisterNotificationClose 
 const mapStateToProps = (state) => {
     return {
         registerNotification: state.modals.registerNotification,
+        registerNotificationText: state.modals.registerNotificationText,
     }
 }
 

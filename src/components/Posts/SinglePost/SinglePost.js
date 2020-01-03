@@ -13,9 +13,9 @@ const SinglePost = (props) => {
 const mapStateToProps = (state, props) => {
   
   return {
-    post: state.posts.posts.filter(post => {
+    post: state.posts.data.filter(post => {
       return (
-        Number(post.id) === Number(props.match.params.id)
+        Number(post.slug) === Number(props.match.params.id)
       )
     }),
   }

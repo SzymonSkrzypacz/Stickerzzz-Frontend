@@ -2,6 +2,7 @@ const initState = {
     registerModal: false,
     loginModal: false,
     registerNotification: false,
+    registerNotificationText: '',
     addPostModal: false
 }
 
@@ -21,9 +22,11 @@ switch (action.type) {
         loginModal:  !state.loginModal
       }
     case 'REGISTER_NOTIFICATION_SWITCH':
+    //console.log('xd')
     return {
         ...state,
-        registerNotification: action.payload
+        registerNotification: action.payload,
+        registerNotificationText: action.text,
     }
     case 'ADD_POST_MODAL_SWITCH':
     return {

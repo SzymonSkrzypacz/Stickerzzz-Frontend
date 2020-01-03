@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-
 import { withStyles } from '@material-ui/core/styles';
-
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import Avatar from '@material-ui/core/Avatar';
 import { green } from '@material-ui/core/colors';
-
+import { connect } from 'react-redux';
+import { sendPost } from '../../../store/actions/postActions';
 
 
 
@@ -54,7 +50,8 @@ class AddPost extends Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
-    
+    console.log('dodawanie postów wyłaczone!!!')
+    this.props.sendPost();
   }
   
   handleChange = (e) => {
@@ -82,7 +79,7 @@ class AddPost extends Component {
       .then(response => response.json())
       .then(data => {
         if(data.length > 0){
-          console.log(data);
+          //console.log(data);
           this.setState({
           lat: data[0].lat,
           lon: data[0].lon,
@@ -102,12 +99,6 @@ render(){
        <Container component='main' maxWidth='xs'>
         <CssBaseline />
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component='h1' variant='h5'>
-            Add Post
-          </Typography>
           <form
             className={classes.form}
             onSubmit={this.handleSubmit}
@@ -193,6 +184,19 @@ render(){
   
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    sendPost: post => dispatch(sendPost(post))
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    isError: state.posts.isError, 
+    data: state.posts.data,
+    isSending: state.posts.isSending
+  }
+}
 
 
-export default withStyles(styles)(AddPost);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(AddPost));

@@ -10,21 +10,23 @@ class PostList extends Component {
   };
 
   render() {
-    return this.state.postList.map((postData, key) => {
-      return (
-        <>
-          <Post {...postData} key={key}/>
-          <SimpleSnackbar />
-        </>
-      );
-
-    });
+    const posts = this.props.posts.map((postData) => <Post {...postData} admin={this.props.admin} user={this.state.user}  key={postData.id}/>)
+    
+    return  ( 
+      <>
+        {posts}
+        <SimpleSnackbar />
+      </>
+    )
   }
 }
 
 const mapStateToProps = state => {
+  //console.log(state.posts.data);
   return { 
-    posts: state.posts.posts
+    posts: state.posts.data,
+    user: state.auth.user,
+    admin: state.auth.admin,
   };
 };
 

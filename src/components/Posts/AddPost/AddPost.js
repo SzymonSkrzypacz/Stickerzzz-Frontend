@@ -29,7 +29,7 @@ function AddPost(props) {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
     return (
-        <div>
+        <>
             <Button variant='contained' color='secondary' onClick={props.switchAddPostModalOpen}>
               Add Post
             </Button>
@@ -42,7 +42,7 @@ function AddPost(props) {
                 <AddPostModal close={props.switchAddPostModalClose} />
                 </div>
             </Modal>
-        </div>
+        </>
     
 );
  }   

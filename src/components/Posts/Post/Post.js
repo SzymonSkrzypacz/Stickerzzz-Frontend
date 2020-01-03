@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
+// import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -27,7 +27,7 @@ import List from '@material-ui/core/List';
 
 import { Link } from 'react-router-dom';
 
-import Map from '../../Map/Map';
+// import Map from '../../Map/Map';
 
 import EditPostModal from '../EditPostModal/EditPostModal';
 
@@ -87,13 +87,13 @@ export default function Post(props) {
   const handleReasonClick = () => {
     setOpenReason(!openReason);
   };
-  // console.log(props);
+  //console.log(props);
 
-  const { avatar, name, date, image, tags, likes, position, shares, id } = props;
-  const link = '/user/' + name;
-  const postLink = '/post/' + id;
+  const { creatorId, title, content, hearts, slug, user, admin} = props;
+  const link = '/user/' + creatorId;
+  const postLink = '/post/' + slug;
   //console.log(props)
-  //console.log(user);
+  //console.log(admin);
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -102,20 +102,23 @@ export default function Post(props) {
             <Avatar
               aria-label='recipe'
               className={classes.avatar}
-              src={avatar}
+              src='https://www.comarch-cloud.com/profile/v1/avatar/01do4e1vtc/256'
               // onClick={handleAvatarClick}
             />
           </Link>
         }
-        action={
+        
+        action={ (admin || user.token === creatorId) && (
           <IconButton aria-label='delete' onClick={handleClick}>
-            <DeleteIcon />
+             <DeleteIcon />
+            
             <Dialog
               open={open}
               onClose={handleClose}
               aria-labelledby='alert-dialog-title'
               aria-describedby='alert-dialog-description'
             >
+              
               <DialogTitle id='alert-dialog-title'>
                 {'Czy na pewno usunąć?'}
               </DialogTitle>
@@ -133,33 +136,36 @@ export default function Post(props) {
                 </Button>
               </DialogActions>
             </Dialog>
-          </IconButton>
+            
+          </IconButton>)
         }
-        title={name}
-        subheader={date}
+        
+        
+        title={title}
+        subheader={content}
       />
 
       <Link to={postLink}>
-        <CardMedia className={classes.media} image={image} title='Paella dish' />
+        <CardMedia className={classes.media} image='https://cdn140.picsart.com/258481213013212.png?r1024x1024' title='Paella dish' />
       </Link>
-      <CardContent>
+      {/* <CardContent>
         <Typography variant='body2' color='textSecondary' component='p'>
           {tags.join(' ')}
         </Typography>
-      </CardContent>
+      </CardContent> */}
       <CardActions disableSpacing>
         <IconButton aria-label='like'>
           <ThumbUpAltIcon />
         </IconButton>
         <Typography variant='body2' color='textSecondary' component='p'>
-          {likes}
+          {hearts}
         </Typography>
         <IconButton aria-label='share'>
           <ShareIcon />
         </IconButton>
-        <Typography variant='body2' color='textSecondary' component='p'>
+        {/* <Typography variant='body2' color='textSecondary' component='p'>
           {shares}
-        </Typography>
+        </Typography> */}
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
@@ -203,12 +209,13 @@ export default function Post(props) {
             </DialogActions>
           </Dialog>
         </IconButton>
-        <EditPostModal />
+        {user.token === creatorId && <EditPostModal />}
+        
       </CardActions>
       <Collapse in={expanded} timeout='auto' unmountOnExit>
-        <CardContent>
+        {/* <CardContent>
           <Map position={position} />
-        </CardContent>
+        </CardContent> */}
       </Collapse>
     </Card>
   );
