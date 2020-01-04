@@ -16,7 +16,6 @@ import Login from '../Auth/Login/LoginNav/LoginNav';
 import Register from '../Auth/Register/RegisterNav/RegisterNav.js';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import EditProfileModal from '../Profile/EditProfileModal';
 import AddPost from '../Posts/AddPost/AddPost';
 import { signOut } from '../../store/actions/authActions';
 
@@ -49,7 +48,7 @@ const Navbar = ({ user, admin, logOut }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  console.log(user)
   return (
     <div className={classes.root}>
 
@@ -112,7 +111,9 @@ const Navbar = ({ user, admin, logOut }) => {
               onClose={handleClose}
             >
               <MenuItem onClick={handleClose}>
-                <EditProfileModal />
+                {/* <Link to={`/user/${user.username}`} >
+                  Mój profil
+                </Link> */}
               </MenuItem>
               <MenuItem onClick={()=>{
                 logOut();

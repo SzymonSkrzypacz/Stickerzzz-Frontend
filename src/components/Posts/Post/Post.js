@@ -24,6 +24,7 @@ import ReportIcon from '@material-ui/icons/Report';
 import DeleteIcon from '@material-ui/icons/Delete';
 import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
+import Comment from './Comment';
 
 import { Link } from 'react-router-dom';
 
@@ -100,6 +101,7 @@ export default function Post(props) {
   const { creatorId, title, content, hearts, slug } = props;
   const link = '/user/' + creatorId;
   const postLink = '/post/' + slug;
+  const comments = ['Super chcemy więcej!', 'Gdzie to znalazłeś?', 'Uwielbiam twoje posty!']
   //console.log(user)
   //console.log(admin);
   return (
@@ -225,6 +227,7 @@ export default function Post(props) {
           <Map position={position} />
         </CardContent> */}
       </Collapse>
+      <Comment comments={comments}/>
     </Card>
   );
 }
