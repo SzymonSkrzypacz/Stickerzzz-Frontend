@@ -12,10 +12,11 @@ export const signIn = (credentials) => {
         })
             .then(function (res) {
                 dispatch({ type: 'LOGIN_SUCCESS', res });
-                console.log(res);
+                dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: `Zostałeś zalogowany!` });
+                //console.log(res);
                 return true
             }).catch(function (err) {
-                console.log(err.message)
+                //console.log(err.message)
                 dispatch({ type: 'LOGIN_ERROR', err });
                 return false
             });

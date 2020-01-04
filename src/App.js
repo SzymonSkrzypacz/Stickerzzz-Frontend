@@ -9,6 +9,7 @@ import Profile from './components/Profile/Profile';
 import SinglePost from './components/Posts/SinglePost/SinglePost';
 import { connect } from 'react-redux'
 import * as actions from './store/actions/postActions';
+import SimpleSnackBar from './components/Snackbar/Snackbar';
 
 class App extends Component {
   
@@ -27,6 +28,7 @@ class App extends Component {
         <Route path='/adminDashboard' component={AdminDashboard} />
         <Route path='/user/:user' component={Profile} />
         <Route path='/post/:id' component={SinglePost} />
+        <SimpleSnackBar />
       </BrowserRouter>
     );
   }

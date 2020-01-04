@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Post from '../Post/Post';
 import { connect } from 'react-redux';
-import SimpleSnackbar from '../../Snackbar/Snackbar'
 
 class PostList extends Component {
   state = {
@@ -15,7 +14,6 @@ class PostList extends Component {
     return  ( 
       <>
         {posts}
-        <SimpleSnackbar />
       </>
     )
   }

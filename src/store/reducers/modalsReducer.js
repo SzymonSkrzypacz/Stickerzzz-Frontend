@@ -22,7 +22,7 @@ switch (action.type) {
         loginModal:  !state.loginModal
       }
     case 'REGISTER_NOTIFICATION_SWITCH':
-    //console.log('xd')
+    //console.log(action)
     return {
         ...state,
         registerNotification: action.payload,

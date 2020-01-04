@@ -48,7 +48,7 @@ const Navbar = ({ user, admin, logOut }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  console.log(user)
+  //console.log(user)
   return (
     <div className={classes.root}>
 
