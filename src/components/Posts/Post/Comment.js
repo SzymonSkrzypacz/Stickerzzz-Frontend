@@ -6,6 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import TextField from '@material-ui/core/TextField';
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles(theme => ({
@@ -27,9 +28,11 @@ export default function Comment({ comments }) {
       return (
         <>  
           <ListItem key={comment.id}>
+          <Link to={'user/' + comment.author}>
             <ListItemAvatar>
               <Avatar src='https://www.comarch-cloud.com/profile/v1/avatar/01do4e1vtc/256' />
             </ListItemAvatar>
+          </Link>
             <ListItemText primary={comment.text} secondary={comment.author}/>
           </ListItem>
         </>
