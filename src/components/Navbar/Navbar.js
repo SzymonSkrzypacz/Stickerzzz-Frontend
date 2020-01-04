@@ -87,13 +87,12 @@ const Navbar = ({ user, admin, logOut }) => {
               </IconButton>
             </>
           )}
-           {/* {admin && ( 
-            <Button>
-              <Link className={classes.navLinks} to='/adminDashboard'>
-                Admin Dashboard
-                  </Link>
-            </Button>
-           )} */}
+           {admin && ( 
+            <Link className={classes.navLinks} to='/adminDashboard'>
+              Admin Dashboard
+            </Link>
+            
+           )}
            
             <Menu
               id='menu-appbar'
