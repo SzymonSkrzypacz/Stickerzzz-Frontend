@@ -88,11 +88,19 @@ export default function Post(props) {
     setOpenReason(!openReason);
   };
   //console.log(props);
+  
+  const checkIsAuthorOrAdmin = () => {
+    //console.log(props);
+    if(props.admin !== null) return true;
+    else if (props.user !== null && props.user.token === props.creatorId) return true;
+    else return false;
+  }
 
-  const { creatorId, title, content, hearts, slug, user, admin} = props;
+  const author = checkIsAuthorOrAdmin();
+  const { creatorId, title, content, hearts, slug } = props;
   const link = '/user/' + creatorId;
   const postLink = '/post/' + slug;
-  //console.log(props)
+  //console.log(user)
   //console.log(admin);
   return (
     <Card className={classes.card}>
@@ -108,7 +116,7 @@ export default function Post(props) {
           </Link>
         }
         
-        action={ (admin || user.token === creatorId) && (
+        action={ author && (
           <IconButton aria-label='delete' onClick={handleClick}>
              <DeleteIcon />
             
@@ -145,7 +153,7 @@ export default function Post(props) {
         subheader={content}
       />
 
-      <Link to={postLink}>
+      <Link to={postLink} >
         <CardMedia className={classes.media} image='https://cdn140.picsart.com/258481213013212.png?r1024x1024' title='Paella dish' />
       </Link>
       {/* <CardContent>
@@ -209,7 +217,7 @@ export default function Post(props) {
             </DialogActions>
           </Dialog>
         </IconButton>
-        {user.token === creatorId && <EditPostModal />}
+        { author && <EditPostModal />}
         
       </CardActions>
       <Collapse in={expanded} timeout='auto' unmountOnExit>

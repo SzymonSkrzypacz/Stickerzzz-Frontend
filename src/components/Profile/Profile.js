@@ -19,25 +19,39 @@ const useStyles = makeStyles({
 
 function Profile(props) {
   const classes = useStyles();
-  //console.log(props)
+  const userProfile = null;
+  const checkCanEdit = () => {
+    if(props.admin !== null) return true;
+    else if (props.user !== null && props.user.token === props.match.params.user) return true;
+    else return false;
+  }
+  
+  const checkIsUserProfile = () => {
+    if (userProfile !== null) return true;
+    else return false;
+  }
+  
+  const canEdit = checkCanEdit();
+  const isUserProfile = checkIsUserProfile();
+  
   return (
     <Card className={classes.card}>
       <CardActionArea>
         <CardMedia
           component="img"
-          alt={props.user.username}
+          alt={ isUserProfile ? userProfile.username : 'Nie pobrano' }
           height="400"
-          image={props.user.avatar || 'https://www.comarch-cloud.com/profile/v1/avatar/01do4e1vtc/256'}
-          title={props.user.username}
+          image={ isUserProfile ? userProfile.avatar || 'https://www.comarch-cloud.com/profile/v1/avatar/01do4e1vtc/256' : 'https://www.comarch-cloud.com/profile/v1/avatar/01do4e1vtc/256'}
+          title={ isUserProfile ? userProfile.username : 'Nie pobrano'}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {props.user.username}
+            {isUserProfile ? userProfile.username : 'Nie pobrano'}
           </Typography>
-          {props.admin && (
+          {canEdit && (
           <>
             <Typography variant="body3" color="textSecondary" component="p">
-              {props.user.email}
+              {isUserProfile ? userProfile.email : 'Nie pobrano'}
             </Typography>
           </>
           )}
