@@ -101,7 +101,23 @@ export default function Post(props) {
   const { creatorId, title, content, hearts, slug } = props;
   const link = '/user/' + creatorId;
   const postLink = '/post/' + slug;
-  const comments = ['Super chcemy więcej!', 'Gdzie to znalazłeś?', 'Uwielbiam twoje posty!']
+  const comments = [
+    {
+      text: 'Super chcemy więcej!',
+      id: 1,
+      author: 'Janek123'
+    }, 
+    {
+      text: 'Miło ogląda się Twoje posty',
+      id: 2,
+      author: 'Januszxyq'
+    }, 
+    {
+      text: 'BYŁO!!!!!111',
+      id: 3,
+      author: 'Gosia1024'
+    }
+  ];
   //console.log(user)
   //console.log(admin);
   return (

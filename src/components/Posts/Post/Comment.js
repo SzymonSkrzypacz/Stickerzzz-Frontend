@@ -26,11 +26,11 @@ export default function Comment({ comments }) {
     {comments.map(comment => {
       return (
         <>  
-          <ListItem>
+          <ListItem key={comment.id}>
             <ListItemAvatar>
               <Avatar src='https://www.comarch-cloud.com/profile/v1/avatar/01do4e1vtc/256' />
             </ListItemAvatar>
-            <ListItemText primary={comment} />
+            <ListItemText primary={comment.text} secondary={comment.author}/>
           </ListItem>
         </>
       )
@@ -38,7 +38,7 @@ export default function Comment({ comments }) {
     })}
     <ListItem>
             <form className={classes.form} noValidate autoComplete="off">
-              <TextField id="outlined-basic" label='Dodaj komentarz!' variant="outlined" className={classes.form}/>
+              <TextField label='Dodaj komentarz!' variant="outlined" className={classes.form}/>
             </form>
     </ListItem>
     </List>
