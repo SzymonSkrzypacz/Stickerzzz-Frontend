@@ -27,6 +27,7 @@ export const signIn = (credentials) => {
 export const signOut = () => {
     return (dispatch, getState) => {
                 dispatch({ type: 'SIGNOUT_SUCCESS' })
+                dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: `Zostałeś wylogowany!` });
         };
     }
 

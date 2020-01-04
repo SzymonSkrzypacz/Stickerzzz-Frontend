@@ -6,18 +6,15 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-// import Switch from '@material-ui/core/Switch';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-// import Button from '@material-ui/core/Button';
 import Login from '../Auth/Login/LoginNav/LoginNav';
 import Register from '../Auth/Register/RegisterNav/RegisterNav.js';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AddPost from '../Posts/AddPost/AddPost';
 import { signOut } from '../../store/actions/authActions';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -59,11 +56,12 @@ const Navbar = ({ user, admin, logOut }) => {
               Stickerzzz
             </Link>
           </Typography>
-          <Typography variant='h6' className={classes.title}>
             <Link className={classes.navLinks} to='/postList'>
-              Posty
+              <Button color='inherit' >
+                Posty
+              </Button>
             </Link>
-          </Typography>
+
           {!user && (
           <>
             <Login />
@@ -88,9 +86,13 @@ const Navbar = ({ user, admin, logOut }) => {
             </>
           )}
            {admin && ( 
+
             <Link className={classes.navLinks} to='/adminDashboard'>
-              Admin Dashboard
+              <Button color='inherit' >
+                Admin Dashboard
+              </Button>
             </Link>
+
             
            )}
            

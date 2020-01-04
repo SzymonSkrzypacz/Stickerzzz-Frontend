@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
-// import CardContent from '@material-ui/core/CardContent';
+import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -28,7 +28,7 @@ import Comment from './Comment';
 
 import { Link } from 'react-router-dom';
 
-// import Map from '../../Map/Map';
+import Map from '../../Map/Map';
 
 import EditPostModal from '../EditPostModal/EditPostModal';
 
@@ -96,7 +96,8 @@ export default function Post(props) {
     else if (props.user !== null && props.user.token === props.creatorId) return true;
     else return false;
   }
-
+  
+  const position = [[51.220152, 16.161984]];
   const author = checkIsAuthorOrAdmin();
   const { creatorId, title, content, hearts, slug } = props;
   const link = '/user/' + creatorId;
@@ -239,9 +240,9 @@ export default function Post(props) {
         
       </CardActions>
       <Collapse in={expanded} timeout='auto' unmountOnExit>
-        {/* <CardContent>
-          <Map position={position} />
-        </CardContent> */}
+        <CardContent>
+          <Map position={position} width='470px' height='470px'/>
+        </CardContent>
       </Collapse>
       <Comment comments={comments}/>
     </Card>

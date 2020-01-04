@@ -1,0 +1,19 @@
+.title {
+  position: absolute;
+  text-transform: uppercase;
+  background-color: rgba(63,81,181,0.7);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  padding: 10vh 30vw;
+  border-radius: 20px;
+  color: white;
+  font-size: 50px;
+}
+
+.wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
