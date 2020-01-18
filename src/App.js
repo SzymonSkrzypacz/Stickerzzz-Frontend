@@ -13,10 +13,10 @@ import SimpleSnackBar from './components/Snackbar/Snackbar';
 
 class App extends Component {
   
-  componentDidMount() {
-    const { getPosts } = this.props;
-    getPosts();
-  }
+  // componentDidMount() {
+  //   const { getPosts } = this.props;
+  //   getPosts();
+  // }
   
   render() {
     return (

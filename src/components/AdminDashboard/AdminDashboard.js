@@ -12,6 +12,9 @@ import Divider from '@material-ui/core/Divider';
 import { connect } from 'react-redux';
 import { banUser, giveAdmin, deleteUser } from '../../store/actions/usersActions';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import { Link } from 'react-router-dom';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,6 +54,11 @@ function InteractiveList({ users, deleteUser, giveAdmin, banUser }) {
               return (
               <>
                 <ListItem key={users.userName} className={classes.flex}>
+                  <Link to={'user/' + users.userName}>
+                    <ListItemAvatar>
+                      <Avatar src={users.avatar || 'https://www.comarch-cloud.com/profile/v1/avatar/01do4e1vtc/256'} />
+                    </ListItemAvatar>
+                  </Link>
                   <ListItemText
                     primary={users.userName}
                   />

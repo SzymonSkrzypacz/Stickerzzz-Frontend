@@ -1,5 +1,5 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { Component } from 'react';
+import { addComment } from '../../../store/actions/postActions';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -7,43 +7,63 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import TextField from '@material-ui/core/TextField';
 import { Link } from 'react-router-dom';
+import classes from './Comment.css';
+import { connect } from 'react-redux';
 
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
-  form: {
-    width: '100%'
+
+
+class Comment extends Component {
+  state = {
+    comment: '',
   }
-}));
-
-export default function Comment({ comments }) {
-  const classes = useStyles();
-
-  return (
-    <List className={classes.root}>
+  
+  handleChange = (e) => {
+    this.setState({
+      comment: e.target.value
+    })
+  };
+  
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.addComment('prawdziwyPolak1410', this.state.comment, 'https://www.odziezuliczna.pl/!data/shop/b_shop2_440.jpg', this.props.postId)
+    this.setState({
+      comment: ''
+    })
+  }
+  
+  
+  render(){
+    const { comments } = this.props;
+    return (
+    <List className={classes.root} >
     {comments.map(comment => {
       return (
-        <>  
-          <ListItem key={comment.id}>
-          <Link to={'user/' + comment.author}>
+        <ListItem key={comment.commentId}>
+          <Link to={'user/' + comment.userName}>
             <ListItemAvatar>
-              <Avatar src='https://www.comarch-cloud.com/profile/v1/avatar/01do4e1vtc/256' />
+              <Avatar src={comment.avatar || 'https://www.comarch-cloud.com/profile/v1/avatar/01do4e1vtc/256'} />
             </ListItemAvatar>
           </Link>
-            <ListItemText primary={comment.text} secondary={comment.author}/>
-          </ListItem>
-        </>
+            <ListItemText primary={comment.comment} secondary={comment.userName}/>
+        </ListItem>
       )
     
     })}
     <ListItem>
-            <form className={classes.form} noValidate autoComplete="off">
-              <TextField label='Dodaj komentarz!' variant="outlined" className={classes.form}/>
+            <form className={classes.form} noValidate autoComplete="off" onSubmit={ this.handleSubmit }>
+              <TextField onChange={this.handleChange} value={this.state.comment} label='Dodaj komentarz!' variant="outlined" fullWidth/>
             </form>
     </ListItem>
     </List>
   )
+  }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addComment: (userName, comment, avatar, postId) => dispatch(addComment(userName, comment, avatar, postId)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Comment);

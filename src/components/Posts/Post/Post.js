@@ -97,30 +97,11 @@ export default function Post(props) {
     else return false;
   }
   //console.log(props)
-  const position = [[51.220152, 16.161984]];
   const author = checkIsAuthorOrAdmin();
-  const { creatorId, title, content, hearts, slug } = props;
-  const link = '/user/' + creatorId;
-  const postLink = '/post/' + slug;
-  const comments = [
-    {
-      text: 'Super chcemy więcej!',
-      id: 1,
-      author: 'Janek123'
-    }, 
-    {
-      text: 'Miło ogląda się Twoje posty',
-      id: 2,
-      author: 'Januszxyq'
-    }, 
-    {
-      text: 'BYŁO!!!!!111',
-      id: 3,
-      author: 'Gosia1024'
-    }
-  ];
-  //console.log(user)
-  //console.log(admin);
+  const { userName, avatar, title, time, img, likes, position, comments, postId } = props;
+  const link = '/user/' + userName;
+  const postLink = '/post/' + postId;
+
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -129,7 +110,7 @@ export default function Post(props) {
             <Avatar
               aria-label='recipe'
               className={classes.avatar}
-              src='https://www.comarch-cloud.com/profile/v1/avatar/01do4e1vtc/256'
+              src={avatar || 'https://www.comarch-cloud.com/profile/v1/avatar/01do4e1vtc/256'}
               // onClick={handleAvatarClick}
             />
           </Link>
@@ -169,11 +150,11 @@ export default function Post(props) {
         
         
         title={title}
-        subheader={content}
+        subheader={time}
       />
 
       <Link to={postLink} >
-        <CardMedia className={classes.media} image='https://cdn140.picsart.com/258481213013212.png?r1024x1024' title='Paella dish' />
+        <CardMedia className={classes.media} image={img} title={title} />
       </Link>
       {/* <CardContent>
         <Typography variant='body2' color='textSecondary' component='p'>
@@ -185,7 +166,7 @@ export default function Post(props) {
           <ThumbUpAltIcon />
         </IconButton>
         <Typography variant='body2' color='textSecondary' component='p'>
-          {hearts}
+          {likes}
         </Typography>
         <IconButton aria-label='share'>
           <ShareIcon />
@@ -244,7 +225,7 @@ export default function Post(props) {
           <Map position={position} width='470px' height='470px'/>
         </CardContent>
       </Collapse>
-      <Comment comments={comments}/>
+      <Comment comments={comments} postId={postId}/>
     </Card>
   );
 }

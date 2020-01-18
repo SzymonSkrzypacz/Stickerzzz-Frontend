@@ -9,7 +9,7 @@ class PostList extends Component {
   };
 
   render() {
-    const posts = this.props.posts.map((postData) => <Post {...postData} admin={this.props.admin} user={this.state.user}  key={postData.id}/>)
+    const posts = this.props.posts.map((postData) => <Post {...postData} admin={this.props.admin} user={this.state.user}  key={postData.postId}/>)
     
     return  ( 
       <>

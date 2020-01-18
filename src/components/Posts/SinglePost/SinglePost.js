@@ -15,7 +15,7 @@ const mapStateToProps = (state, props) => {
   return {
     post: state.posts.data.filter(post => {
       return (
-        Number(post.slug) === Number(props.match.params.id)
+        post.postId === Number(props.match.params.id)
       )
     }),
   }

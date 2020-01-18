@@ -7,6 +7,7 @@ export const GET_POSTS_FAILED = 'GET_POSTS_FAILED';
 export const SEND_POST_DONE = 'SEND_POST_DONE';
 export const SEND_POST_FAILED = 'SEND_POST_FAILED';
 export const SEND_POST_REQUESTED = 'SEND_POST_REQUESTED';
+export const ADD_COMMENT = 'ADD_COMMENT';
 
 export function getPostsRequested() {
   return {
@@ -31,6 +32,16 @@ export function getPostsFailed(error) {
   return {
     type: 'GET_POSTS_FAILED',
     payload: error
+  };
+}
+
+export function addComment(userName, comment, avatar, postId) {
+  return {
+    type: 'ADD_COMMENT',
+    userName, 
+    comment, 
+    avatar,
+    postId
   };
 }
 
