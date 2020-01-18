@@ -96,7 +96,7 @@ export default function Post(props) {
     else if (props.user !== null && props.user.token === props.creatorId) return true;
     else return false;
   }
-  
+  //console.log(props)
   const position = [[51.220152, 16.161984]];
   const author = checkIsAuthorOrAdmin();
   const { creatorId, title, content, hearts, slug } = props;

@@ -22,7 +22,6 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Navbar />
-        
         <Route exact path='/' component={MainPage} />
         <Route path='/postList' component={PostList} />
         <Route path='/adminDashboard' component={AdminDashboard} />

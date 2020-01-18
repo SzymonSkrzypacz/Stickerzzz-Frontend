@@ -9,6 +9,9 @@ import Grid from '@material-ui/core/Grid';
 import DeleteIcon from '@material-ui/icons/Delete';
 import BlockIcon from '@material-ui/icons/Block';
 import Divider from '@material-ui/core/Divider';
+import { connect } from 'react-redux';
+import { banUser, giveAdmin, deleteUser } from '../../store/actions/usersActions';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,23 +37,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function InteractiveList() {
+function InteractiveList({ users, deleteUser, giveAdmin, banUser }) {
   const classes = useStyles();
-  
-  const users = [
-    {
-      username: 'janek',
-      email: 'email@wp.pl',
-    },
-    {
-      username: 'franek',
-      email: '123mail@wp.pl',
-    },
-    {
-      username: 'maniek',
-      email: 'maniek@gmail.com',
-    }
-  ]
 
   return (
     <div className={classes.root}>
@@ -59,22 +47,25 @@ export default function InteractiveList() {
                 
           <List className={classes.width}>
                 <Divider />
-            {users.map(user => {
+            {users.map(users => {
               return (
               <>
-                <ListItem className={classes.flex}>
+                <ListItem key={users.userName} className={classes.flex}>
                   <ListItemText
-                    primary={user.username}
+                    primary={users.userName}
                   />
                   <ListItemText
-                    primary={user.email}
+                    primary={users.email}
                   />
                   <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton edge="end" onClick={() => {deleteUser(users.userName)}} aria-label="delete" color={users.isDeleted ? 'secondary' : 'primary'}>
                       <DeleteIcon />
                     </IconButton>
-                    <IconButton edge="end" aria-label="block">
+                    <IconButton edge="end" onClick={() => {banUser(users.userName)}} aria-label="block" color={users.isBanned ? 'secondary' : 'primary'}>
                       <BlockIcon />
+                    </IconButton>
+                    <IconButton edge="end" onClick={() => {giveAdmin(users.userName)}} aria-label="admin" color={users.isAdmin ? 'secondary' : 'primary'}>
+                      <SupervisorAccountIcon />
                     </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem> 
@@ -88,3 +79,19 @@ export default function InteractiveList() {
   </div>
   );
 }
+
+const mapStateToProps = state => {
+  return ({
+    users: state.users.users,
+  });
+}
+
+const mapDispatchToProps = dispatch => {
+  return ({
+    banUser: userName => dispatch(banUser(userName)),
+    giveAdmin: userName => dispatch(giveAdmin(userName)),
+    deleteUser: userName => dispatch(deleteUser(userName)),
+  })
+}
+
+export default connect (mapStateToProps, mapDispatchToProps)(InteractiveList)

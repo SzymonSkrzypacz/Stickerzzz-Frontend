@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function SimpleSnackbar({ registerNotification, registerNotificationText, switchRegisterNotificationClose }) {
   const classes = useStyles();
-  console.log(registerNotification)
+  //console.log(registerNotification)
   return (
     <div>
       <Snackbar
