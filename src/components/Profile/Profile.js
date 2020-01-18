@@ -27,7 +27,6 @@ class Profile extends Component {
   render(){
     const { user, posts } = this.props;
     const canEdit = this.checkCanEdit();
-    
   return (
     <div className='width-450'>
       <Card className={classes.card} >
@@ -78,7 +77,7 @@ const mapStateToProps = state => {
       } else return null;
       }),  
     admin: state.auth.admin,  
-    posts: state.posts.data.filter(post => post.userName === window.location.href.slice(27))
+    posts: state.posts.data.filter(post => post.userName === window.location.href.slice((window.location.href.indexOf('user') + 5)))
   }
 }
 

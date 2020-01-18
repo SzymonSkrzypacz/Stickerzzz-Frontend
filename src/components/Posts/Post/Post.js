@@ -98,9 +98,10 @@ export default function Post(props) {
   }
   //console.log(props)
   const author = checkIsAuthorOrAdmin();
-  const { userName, avatar, title, time, img, likes, position, comments, postId } = props;
+  const { userName, avatar, title, content, img, favorited, position, comments, id } = props;
   const link = '/user/' + userName;
-  const postLink = '/post/' + postId;
+ // console.log(props)
+  const postLink = '/post/' + id;
 
   return (
     <Card className={classes.card}>
@@ -150,11 +151,11 @@ export default function Post(props) {
         
         
         title={title}
-        subheader={time}
+        subheader={content}
       />
 
       <Link to={postLink} >
-        <CardMedia className={classes.media} image={img} title={title} />
+        <CardMedia className={classes.media} image={img || 'https://www.pandastickers.com/wp-content/uploads/Angry-Panda-Sticker.png'} title={title} />
       </Link>
       {/* <CardContent>
         <Typography variant='body2' color='textSecondary' component='p'>
@@ -166,7 +167,7 @@ export default function Post(props) {
           <ThumbUpAltIcon />
         </IconButton>
         <Typography variant='body2' color='textSecondary' component='p'>
-          {likes}
+          {favorited}
         </Typography>
         <IconButton aria-label='share'>
           <ShareIcon />
@@ -220,12 +221,12 @@ export default function Post(props) {
         { author && <EditPostModal />}
         
       </CardActions>
-      <Collapse in={expanded} timeout='auto' unmountOnExit>
+      <Collapse in={expanded} contentout='auto' unmountOnExit>
         <CardContent>
           <Map position={position} width='470px' height='470px'/>
         </CardContent>
       </Collapse>
-      <Comment comments={comments} postId={postId}/>
+      <Comment comments={comments} id={id}/>
     </Card>
   );
 }

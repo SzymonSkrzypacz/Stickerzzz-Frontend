@@ -3,7 +3,8 @@ const initState = {
     loginModal: false,
     registerNotification: false,
     registerNotificationText: '',
-    addPostModal: false
+    addPostModal: false,
+    editProfileModal: false
 }
 
 const modalsReducer = (state = initState, action) => {
@@ -32,6 +33,11 @@ switch (action.type) {
     return {
         ...state,
         addPostModal: action.payload
+    }
+    case 'EDIT_PROFILE_MODAL_SWITCH':
+    return {
+        ...state,
+        editProfileModal: action.payload
     }
 
     default:

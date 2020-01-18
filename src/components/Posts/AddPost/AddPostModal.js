@@ -42,7 +42,7 @@ class AddPost extends Component {
   state = {
     title: '',
     content: '',
-    img: '',
+    img: '', 
     tagList: [],
     lat: '',
     lon: '',

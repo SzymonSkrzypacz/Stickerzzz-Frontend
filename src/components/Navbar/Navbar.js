@@ -15,7 +15,6 @@ import { connect } from 'react-redux';
 import AddPost from '../Posts/AddPost/AddPost';
 import { signOut } from '../../store/actions/authActions';
 import Button from '@material-ui/core/Button';
-
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -32,11 +31,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Navbar = ({ user, admin, logOut }) => {
+const Navbar = ({ user, admin, logOut, getPosts }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
+  
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
@@ -84,6 +84,14 @@ const Navbar = ({ user, admin, logOut }) => {
                 <AccountCircle />
               </IconButton>
             </>
+          )}
+          
+          {user && (
+            <Link className={classes.navLinks} to='/myProfile'>
+              <Button color='inherit' >
+                Profile
+              </Button>
+            </Link>
           )}
            {admin && ( 
 

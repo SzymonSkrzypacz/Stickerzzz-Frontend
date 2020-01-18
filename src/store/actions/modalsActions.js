@@ -44,3 +44,19 @@ export const switchAddPostModalOpen = () => {
                 dispatch({ type: 'ADD_POST_MODAL_SWITCH', payload: true })
         };
 }
+
+
+
+export const switchEditProfileModalClose = () => {
+    //console.log('xd')
+    return (dispatch, getState) => {
+                dispatch({ type: 'EDIT_PROFILE_MODAL_SWITCH', payload: false })
+        };
+}
+
+export const switchEditProfileModalOpen = () => {
+    //console.log('xd')
+    return (dispatch, getState) => {
+                dispatch({ type: 'EDIT_PROFILE_MODAL_SWITCH', payload: true })
+        };
+}

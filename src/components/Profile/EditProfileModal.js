@@ -1,54 +1,117 @@
-import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Container from '@material-ui/core/Container';
+import { green } from '@material-ui/core/colors';
+import { connect } from 'react-redux';
 
-function getModalStyle() {
-  return {
-    top: `50%`,
-    left: `50%`,
-    transform: `translate(-50%, -50%)`,
-  };
-}
 
-const useStyles = makeStyles(theme =>
-  createStyles({
-    paper: {
-      position: 'absolute',
-      width: 400,
-      backgroundColor: theme.palette.background.paper,
-      borderRadius: '10px',
-      padding: theme.spacing(2, 4, 3),
+
+
+const styles = theme => ({
+  '@global': {
+    body: {
+      backgroundColor: 'theme.palette.common.white',
     },
-  })
-);
+  },
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: '#282C34',
+  },
+  form: {
+    width: '100%',
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  success: {
+    backgroundColor: green[600],
+  },
+});
 
-export default function EditProfileModal() {
-  const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
+class EditProfileModal extends Component {
+  state = {
+    user: this.props.user
   };
+  
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('dodawanie postów wyłaczone!!!')
+    this.props.sendPost();
+  }
+  
+  handleChange = (e) => {
+    e.preventDefault();
+    //console.log(e.target.value);
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+  }
+  
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  
+render(){
+  //  const { openModal, switchEditProfileModalModalOpen, switchEditProfileModalModalClose } = this.props;
+  const { classes } = this.props;
+    return (
+      <>
+       <Container component='main' maxWidth='xs'>
+        <CssBaseline />
+        <div className={classes.paper}>
+          <form
+            className={classes.form}
+            onSubmit={this.handleSubmit}
+        
+          >
 
-  return (
-    <>
-      <div onClick={handleOpen}>Profile</div>
-      <Modal
-        disableEnforceFocus
-        aria-labelledby='simple-modal-title'
-        aria-describedby='simple-modal-description'
-        open={open}
-        onClose={handleClose}
-      >
-        <div style={modalStyle} className={classes.paper}>
-          <h2 id='simple-modal-title'>Edytuj swój profil</h2>
+            <TextField
+              value={this.state.title}
+              onChange={this.handleChange}
+              variant='outlined'
+              margin='normal'
+              required
+              fullWidth
+              id='title'
+              label='Tytuł posta'
+              name='title'
+              autoFocus
+            />
+
+            <Button
+              type='submit'
+              fullWidth
+              variant='contained'
+              color='primary'
+              className={classes.submit}
+            >
+              Edytuj profil!
+            </Button>
+          </form>
         </div>
-      </Modal>
-    </>
+      </Container>
+      </>
   );
 }
+  
+}
+
+
+
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user, 
+
+  }
+}
+
+
+export default connect(mapStateToProps)(withStyles(styles)(EditProfileModal));
