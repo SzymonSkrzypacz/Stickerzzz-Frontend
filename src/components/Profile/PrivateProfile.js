@@ -55,7 +55,7 @@ class PrivateProfile extends Component {
         open={openModal}
         onClose={switchEditProfileModalClose}>
         <div className={classes.paper}>
-          <EditProfileModal close={switchEditProfileModalClose} />
+          <EditProfileModal close={switchEditProfileModalClose} username={user.username} email={user.email}/>
         </div>
       </Modal>
     </div>

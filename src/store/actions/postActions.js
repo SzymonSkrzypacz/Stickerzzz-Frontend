@@ -8,6 +8,7 @@ export const SEND_POST_DONE = 'SEND_POST_DONE';
 export const SEND_POST_FAILED = 'SEND_POST_FAILED';
 export const SEND_POST_REQUESTED = 'SEND_POST_REQUESTED';
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const DELETE_POST = 'DELETE_POST';
 
 export function getPostsRequested() {
   return {
@@ -42,6 +43,14 @@ export function addComment(userName, comment, avatar, postId) {
     comment, 
     avatar,
     postId
+  };
+}
+
+export function deletePost(postId) {
+  //dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: 'Dodawanie postów aktualnie wyłączone' });
+  return dispatch => {
+    dispatch({ type: 'DELETE_POST', postId });
+    dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: 'Post usunięty!' });
   };
 }
 

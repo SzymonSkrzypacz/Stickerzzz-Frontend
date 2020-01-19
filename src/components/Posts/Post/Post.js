@@ -6,12 +6,12 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import Button from '@material-ui/core/Button';
-import DialogTitle from '@material-ui/core/DialogTitle';
+// import Dialog from '@material-ui/core/Dialog';
+// import DialogActions from '@material-ui/core/DialogActions';
+// import DialogContent from '@material-ui/core/DialogContent';
+// import DialogContentText from '@material-ui/core/DialogContentText';
+// import Button from '@material-ui/core/Button';
+// import DialogTitle from '@material-ui/core/DialogTitle';
 import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
@@ -20,17 +20,19 @@ import { red } from '@material-ui/core/colors';
 import ShareIcon from '@material-ui/icons/Share';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import ReportIcon from '@material-ui/icons/Report';
+// import ReportIcon from '@material-ui/icons/Report';
 import DeleteIcon from '@material-ui/icons/Delete';
-import TextField from '@material-ui/core/TextField';
-import List from '@material-ui/core/List';
+// import TextField from '@material-ui/core/TextField';
+// import List from '@material-ui/core/List';
 import Comment from './Comment';
+import { deletePost } from '../../../store/actions/postActions';
+import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
 import Map from '../../Map/Map';
 
-import EditPostModal from '../EditPostModal/EditPostModal';
+// import EditPostModal from '../EditPostModal/EditPostModal';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -67,38 +69,44 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Post(props) {
+function Post(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
-  const [openReason, setOpenReason] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
+  // const [openReason, setOpenReason] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
+  // const handleClick = () => {
+  //   setOpen(!open);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = (bool) => {
+  //   if(bool) {
+  //     deletePost(id);
+  //     handleClick();
+  //   } else setOpen(false);
+  // };
 
-  const handleReasonClick = () => {
-    setOpenReason(!openReason);
-  };
-  //console.log(props);
+  // const handleReasonClick = () => {
+  //   setOpenReason(!openReason);
+  // };
+  // //console.log(props);
   
-  const checkIsAuthorOrAdmin = () => {
-    //console.log(props);
-    if(props.admin !== null) return true;
-    else if (props.user !== null && props.user.token === props.creatorId) return true;
-    else return false;
-  }
+  // const checkIsAuthorOrAdmin = () => {
+  //   //console.log(props);
+  //   if(props.admin !== null) return true;
+  //   else if (props.user !== null && props.user.token === props.creatorId) return true;
+  //   else return false;
+  // }
   //console.log(props)
-  const author = checkIsAuthorOrAdmin();
-  const { userName, avatar, title, content, img, favorited, position, comments, id, stickers } = props;
+  // const author = checkIsAuthorOrAdmin();
+  const { userName, avatar, title, content, img, favorited, position, comments, id, stickers, deletePost, admin } = props;
+  
+
+  
   const link = '/user/' + userName;
  //console.log(stickers)
   const postLink = '/post/' + id;
@@ -120,36 +128,11 @@ export default function Post(props) {
           </Link>
         }
         
-        action={ author && (
-          <IconButton aria-label='delete' onClick={handleClick}>
-             <DeleteIcon />
+        action={ admin && (
+
+             <DeleteIcon onClick={() => deletePost(id)}/>
             
-            <Dialog
-              open={open}
-              onClose={handleClose}
-              aria-labelledby='alert-dialog-title'
-              aria-describedby='alert-dialog-description'
-            >
-              
-              <DialogTitle id='alert-dialog-title'>
-                {'Czy na pewno usunąć?'}
-              </DialogTitle>
-              <DialogContent>
-                <DialogContentText id='alert-dialog-description'>
-                  Pamiętaj, że zmiany nie da się cofnąć!!!
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose} color='primary'>
-                  Nie
-                </Button>
-                <Button onClick={handleClose} color='primary' autoFocus>
-                  Tak
-                </Button>
-              </DialogActions>
-            </Dialog>
-            
-          </IconButton>)
+            )
         }
         
         
@@ -189,7 +172,7 @@ export default function Post(props) {
           <LocationOnIcon />
         </IconButton>
 
-        <IconButton aria-label='report' onClick={handleReasonClick}>
+        {/* <IconButton aria-label='report' onClick={handleReasonClick}>
           <ReportIcon />
           <List className={classes.root}>
           
@@ -221,7 +204,7 @@ export default function Post(props) {
             </DialogActions>
           </Dialog>
         </IconButton>
-        { author && <EditPostModal />}
+        { author && <EditPostModal />} */}
         
       </CardActions>
       <Collapse in={expanded} contentout='auto' unmountOnExit>
@@ -233,3 +216,18 @@ export default function Post(props) {
     </Card>
   );
 }
+
+
+const mapDispatchToProps = dispatch => {
+  return {
+    deletePost: postId => dispatch(deletePost(postId))
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    admin: state.auth.admin,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post)

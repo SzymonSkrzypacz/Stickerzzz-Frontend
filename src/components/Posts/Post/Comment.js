@@ -26,7 +26,7 @@ class Comment extends Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.addComment('prawdziwyPolak1410', this.state.comment, 'https://www.odziezuliczna.pl/!data/shop/b_shop2_440.jpg', this.props.postId)
+    this.props.addComment('prawdziwyPolak1410', this.state.comment, 'https://www.odziezuliczna.pl/!data/shop/b_shop2_440.jpg', this.props.id)
     this.setState({
       comment: ''
     })

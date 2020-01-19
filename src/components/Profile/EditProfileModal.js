@@ -40,7 +40,8 @@ const styles = theme => ({
 
 class EditProfileModal extends Component {
   state = {
-    userName: this.props
+    userName: this.props.username,
+    email: this.props.email
   };
   
   handleSubmit = (e) => {
@@ -74,7 +75,7 @@ render(){
           >
 
             <TextField
-              value={this.state.title}
+              value={this.state.userName}
               onChange={this.handleChange}
               variant='outlined'
               margin='normal'
@@ -86,15 +87,15 @@ render(){
               autoFocus
             />
             <TextField
-              value={this.state.title}
+              value={this.state.email}
               onChange={this.handleChange}
               variant='outlined'
               margin='normal'
               required
               fullWidth
-              id='password'
-              label='Hasło'
-              name='password'
+              id='email'
+              label='Email'
+              name='email'
               autoFocus
             />
 
