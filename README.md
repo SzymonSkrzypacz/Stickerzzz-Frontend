@@ -1,4 +1,4 @@
-*DEMO*
+### DEMO
 https://www.stickerzzz.social/
 
 ### `npm start`
