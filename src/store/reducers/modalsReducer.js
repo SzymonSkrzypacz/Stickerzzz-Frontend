@@ -4,7 +4,8 @@ const initState = {
     registerNotification: false,
     registerNotificationText: '',
     addPostModal: false,
-    editProfileModal: false
+    editProfileModal: false,
+    mode: '',
 }
 
 const modalsReducer = (state = initState, action) => {
@@ -39,7 +40,13 @@ switch (action.type) {
         ...state,
         editProfileModal: action.payload
     }
-
+    
+    case 'CHANGE_MODE': {
+      return {
+        ...state,
+        mode: action.payload,
+      };
+    }
     default:
       return state
   }

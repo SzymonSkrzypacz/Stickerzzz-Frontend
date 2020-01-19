@@ -40,13 +40,13 @@ const styles = theme => ({
 
 class EditProfileModal extends Component {
   state = {
-    user: this.props.user
+    userName: this.props
   };
   
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log('dodawanie postów wyłaczone!!!')
-    this.props.sendPost();
+    console.log('Edycja wyłączona!!!')
+    //this.props.sendPost();
   }
   
   handleChange = (e) => {
@@ -80,9 +80,21 @@ render(){
               margin='normal'
               required
               fullWidth
-              id='title'
-              label='Tytuł posta'
-              name='title'
+              id='userName'
+              label='Nazwa użytkownika'
+              name='userName'
+              autoFocus
+            />
+            <TextField
+              value={this.state.title}
+              onChange={this.handleChange}
+              variant='outlined'
+              margin='normal'
+              required
+              fullWidth
+              id='password'
+              label='Hasło'
+              name='password'
               autoFocus
             />
 

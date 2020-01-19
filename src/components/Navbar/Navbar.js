@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AddPost from '../Posts/AddPost/AddPost';
 import { signOut } from '../../store/actions/authActions';
+import { changeMode } from '../../store/actions/modalsActions';
 import Button from '@material-ui/core/Button';
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,12 +32,25 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Navbar = ({ user, admin, logOut, getPosts }) => {
+const Navbar = ({ user, admin, logOut, getPosts, changeMode, mode }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
   
+    
+  
+
+  const resize = () => {
+    if (window.innerWidth <= 500) {
+      changeMode('mobile');
+    } else if (window.innerWidth > 500) {
+      changeMode('desktop');
+    } 
+  };
+  
+  resize();
+  window.addEventListener('resize', resize);
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
@@ -45,10 +59,9 @@ const Navbar = ({ user, admin, logOut, getPosts }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  //console.log(user)
-  return (
+ 
+  if(mode === 'desktop') return (
     <div className={classes.root}>
-
       <AppBar position='fixed'>
         <Toolbar>
           <Typography variant='h6' className={classes.title}>
@@ -134,20 +147,104 @@ const Navbar = ({ user, admin, logOut, getPosts }) => {
         </Toolbar>
       </AppBar>
     </div>
-  );
+  ); else return (
+    <div className={classes.root}>
+      <AppBar position='fixed'>
+        <Toolbar>
+          <Typography variant='h6' className={classes.title}>
+            <Link className={classes.navLinks} to='/'>
+              Stickerzzz
+            </Link>
+          </Typography>
+
+
+          {!user && (
+          <>
+            <Login />
+            <Register />
+          </>
+          )}
+
+          
+          
+          {user && (
+            <>
+              <AddPost />
+              <IconButton
+                aria-label='account of current user'
+                aria-controls='menu-appbar'
+                aria-haspopup='true'
+                onClick={handleMenu}
+                color='inherit'
+              >
+                <AccountCircle />
+              </IconButton>
+            </>
+          )}
+          
+         
+          
+           
+            <Menu
+              id='menu-appbar'
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={open}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>
+                <Link to={`/postList`} >
+                  Posty
+                </Link>
+              </MenuItem>
+              {user && (
+              <MenuItem onClick={handleClose}>
+                <Link to={`/myProfile`} >
+                  Mój profil
+                </Link>
+              </MenuItem>
+              )}
+              {admin && ( 
+              <MenuItem onClick={handleClose}>
+                <Link to={`/adminDashboard`} >
+                  Admin dashboard
+                </Link>
+              </MenuItem>
+              )}
+              <MenuItem onClick={()=>{
+                logOut();
+                handleClose();
+              }}>Log out</MenuItem>
+            </Menu>
+          
+
+        </Toolbar>
+      </AppBar>
+    </div>
+  )
 };
 
 
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
-    admin: state.auth.admin
+    admin: state.auth.admin,
+    mode: state.modals.mode
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     logOut: () => dispatch(signOut()),
+    changeMode: mode => dispatch(changeMode(mode))
   }
   
 }

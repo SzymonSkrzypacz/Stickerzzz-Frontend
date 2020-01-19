@@ -60,3 +60,6 @@ export const switchEditProfileModalOpen = () => {
                 dispatch({ type: 'EDIT_PROFILE_MODAL_SWITCH', payload: true })
         };
 }
+
+
+export const changeMode = payload => ({ payload, type: 'CHANGE_MODE' });
