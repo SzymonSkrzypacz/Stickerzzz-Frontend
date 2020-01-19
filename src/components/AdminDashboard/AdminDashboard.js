@@ -40,10 +40,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-function InteractiveList({ users, deleteUser, giveAdmin, banUser }) {
+function InteractiveList({ users, deleteUser, giveAdmin, banUser, mode }) {
   const classes = useStyles();
 
-  return (
+  if(mode === 'desktop') return (
     <div className={classes.root}>
       <Grid container>
         <div className={classes.demo}>
@@ -60,10 +60,10 @@ function InteractiveList({ users, deleteUser, giveAdmin, banUser }) {
                     </ListItemAvatar>
                   </Link>
                   <ListItemText
-                    primary={users.userName}
+                    secondary={users.userName}
                   />
                   <ListItemText
-                    primary={users.email}
+                    secondary={users.email}
                   />
                   <ListItemSecondaryAction>
                     <IconButton edge="end" onClick={() => {deleteUser(users.userName)}} aria-label="delete" color={users.isDeleted ? 'secondary' : 'primary'}>
@@ -85,12 +85,52 @@ function InteractiveList({ users, deleteUser, giveAdmin, banUser }) {
         </div>
       </Grid>
   </div>
-  );
+  ); else return (
+    <div className={classes.root}>
+      <Grid container>
+        <div className={classes.demo}>
+                
+          <List className={classes.width}>
+                <Divider />
+            {users.map(users => {
+              return (
+              <>
+                <ListItem key={users.userName} className={classes.flex}>
+                  <Link to={'user/' + users.userName}>
+                    <ListItemAvatar>
+                      <Avatar src={users.avatar || 'https://www.comarch-cloud.com/profile/v1/avatar/01do4e1vtc/256'} />
+                    </ListItemAvatar>
+                  </Link>
+                  <ListItemText
+                    secondary={users.userName}
+                  />
+                  <ListItemSecondaryAction>
+                    <IconButton edge="end" onClick={() => {deleteUser(users.userName)}} aria-label="delete" color={users.isDeleted ? 'secondary' : 'primary'}>
+                      <DeleteIcon />
+                    </IconButton>
+                    <IconButton edge="end" onClick={() => {banUser(users.userName)}} aria-label="block" color={users.isBanned ? 'secondary' : 'primary'}>
+                      <BlockIcon />
+                    </IconButton>
+                    <IconButton edge="end" onClick={() => {giveAdmin(users.userName)}} aria-label="admin" color={users.isAdmin ? 'secondary' : 'primary'}>
+                      <SupervisorAccountIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem> 
+                <Divider />
+              </>
+            )
+            })}
+          </List>
+        </div>
+      </Grid>
+  </div>
+  )
 }
 
 const mapStateToProps = state => {
   return ({
     users: state.users.users,
+    mode: state.modals.mode,
   });
 }
 
