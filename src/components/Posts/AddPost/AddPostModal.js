@@ -50,8 +50,11 @@ class AddPost extends Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log('dodawanie postów wyłaczone!!!')
-    this.props.sendPost();
+
+    const data = {
+      ...this.state
+    }
+    this.props.sendPost(data);
   }
   
   handleChange = (e) => {
@@ -126,7 +129,7 @@ render(){
               required
               fullWidth
               id='content'
-              label='Treść posta'
+              label='Data'
               name='content'
             />
             

@@ -98,10 +98,13 @@ export default function Post(props) {
   }
   //console.log(props)
   const author = checkIsAuthorOrAdmin();
-  const { userName, avatar, title, content, img, favorited, position, comments, id } = props;
+  const { userName, avatar, title, content, img, favorited, position, comments, id, stickers } = props;
   const link = '/user/' + userName;
- // console.log(props)
+ //console.log(stickers)
   const postLink = '/post/' + id;
+  const defaultPosition = [
+    [51.220152, 16.161984]
+  ];
 
   return (
     <Card className={classes.card}>
@@ -153,9 +156,9 @@ export default function Post(props) {
         title={title}
         subheader={content}
       />
-
+      
       <Link to={postLink} >
-        <CardMedia className={classes.media} image={img || 'https://www.pandastickers.com/wp-content/uploads/Angry-Panda-Sticker.png'} title={title} />
+        <CardMedia className={classes.media} image={ img ? img : (stickers !== undefined && stickers.length > 0 ? (stickers[0].img) : ('https://www.pandastickers.com/wp-content/uploads/Angry-Panda-Sticker.png'))} title={title} />
       </Link>
       {/* <CardContent>
         <Typography variant='body2' color='textSecondary' component='p'>
@@ -223,7 +226,7 @@ export default function Post(props) {
       </CardActions>
       <Collapse in={expanded} contentout='auto' unmountOnExit>
         <CardContent>
-          <Map position={position} width='470px' height='470px'/>
+          <Map position={position || defaultPosition } width='470px' height='470px'/>
         </CardContent>
       </Collapse>
       <Comment comments={comments} id={id}/>

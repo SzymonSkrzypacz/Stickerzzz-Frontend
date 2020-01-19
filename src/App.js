@@ -20,15 +20,16 @@ class App extends Component {
   // }
   
   render() {
+    const { admin, user } = this.props;
     return (
       <BrowserRouter>
         <Navbar />
         <Route exact path='/' component={MainPage} />
         <Route path='/postList' component={PostList} />
-        <Route path='/adminDashboard' component={AdminDashboard} />
+        {admin ? <Route path='/adminDashboard' component={AdminDashboard} /> : <Route path='/adminDashboard' component={PostList} />}
+        {user ? <Route path='/myProfile' component={PrivateProfile} /> : <Route path='/myProfile' component={PostList} />}
         <Route path='/user/:user' component={Profile} />
         <Route path='/post/:id' component={SinglePost} />
-        <Route path='/myProfile' component={PrivateProfile} />
         <SimpleSnackBar />
       </BrowserRouter>
     );
@@ -36,7 +37,10 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return state;
+  return {
+    admin: state.auth.admin,
+    user: state.auth.user
+  };
 };
 const mapDispatchToProps = (dispatch) => {
   return {

@@ -88,20 +88,7 @@ const Navbar = ({ user, admin, logOut, getPosts, changeMode, mode }) => {
 
           
           
-          {user && (
-            <>
-              <AddPost />
-              <IconButton
-                aria-label='account of current user'
-                aria-controls='menu-appbar'
-                aria-haspopup='true'
-                onClick={handleMenu}
-                color='inherit'
-              >
-                <AccountCircle />
-              </IconButton>
-            </>
-          )}
+          
           
           {user && (
             <Link className={classes.navLinks} to='/myProfile'>
@@ -120,6 +107,21 @@ const Navbar = ({ user, admin, logOut, getPosts, changeMode, mode }) => {
 
             
            )}
+           
+           {user && (
+            <>
+              <AddPost />
+              <IconButton
+                aria-label='account of current user'
+                aria-controls='menu-appbar'
+                aria-haspopup='true'
+                onClick={handleMenu}
+                color='inherit'
+              >
+                <AccountCircle />
+              </IconButton>
+            </>
+          )}
            
             <Menu
               id='menu-appbar'

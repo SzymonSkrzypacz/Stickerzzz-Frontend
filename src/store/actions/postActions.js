@@ -63,37 +63,39 @@ export function getPosts() {
 }
 
 export const sendPost = (data) => {
+  console.log(data)
   return (dispatch, getState) => {
   dispatch(sendPostRequested());
-  dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: 'Dodawanie postów aktualnie wyłączone' });
-  // axios.post(`${apiUrl}api/Posts`, {
-  //     "Post": {
-  //       "Title": "unikalnytytul123",
-  //       "Content": "Nowy post",
-  //       "StickersData": [
-  //         {
-  //           "Name": "unikalnyslug123",
-  //           "Longitude": 51.204491,
-  //           "Latitude": 16.159241,
-  //           "Img": "https://cdn140.picsart.com/258481213013212.png?r1024x1024",
-  //           "TagList": [
-  //             "superTag"
-  //           ]
-  //         }
-  //       ]
-  //     }
-  // })
-  //   .then(function (res) {
-  //       dispatch({ type: 'SEND_POST_DONE', res });
-  //       dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: 'Dodawanie postów aktualnie wyłączone' });
-  //       //console.log(getState());
-  //       return true
-  //   }).catch(function (err) {
-  //       console.log(err.message)
-  //       dispatch({ type: 'SEND_POST_FAILED', err });
-  //       dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: 'Dodawanie postów aktualnie wyłączone' });
-  //       return false
-  //   });
+  //dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: 'Dodawanie postów aktualnie wyłączone' });
+  axios.post(`${apiUrl}api/Posts`, {
+      "Post": {
+          "Title": data.title,
+          "Content": data.content,
+          "StickersData": [
+            {
+              "Name": data.title,
+              "Longitude": Number(data.lon),
+              "Latitude": Number(data.lat),
+              "Img": data.img,
+              "TagList": [
+                ...data.tagList
+              ]
+            }
+          ]
+        }
+      }
+  )
+    .then(function (res) {
+        dispatch({ type: 'SEND_POST_DONE', res });
+        dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: 'Post dodany' });
+        //console.log(getState());
+        return true
+    }).catch(function (err) {
+        console.log(err.message)
+        dispatch({ type: 'SEND_POST_FAILED', err });
+        dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: 'Post nie został dodany' });
+        return false
+    });
 
   }
 }

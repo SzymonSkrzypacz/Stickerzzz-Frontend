@@ -140,7 +140,7 @@ const postReducer = (state = initState, action) => {
       
     case actions.SEND_POST_DONE:
       const post = action.res.data;
-      console.log(post.post)
+      //console.log(post.post)
       return { ...state, isSending: false, data: [...state.data, post.post] };
     case actions.SEND_POST_FAILED:
       return { ...state, isSending: false, isError: true }
