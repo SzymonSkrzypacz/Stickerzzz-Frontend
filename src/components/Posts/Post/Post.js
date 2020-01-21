@@ -102,22 +102,26 @@ function Post(props) {
   //   else if (props.user !== null && props.user.token === props.creatorId) return true;
   //   else return false;
   // }
-  //console.log(props)
   // const author = checkIsAuthorOrAdmin();
   const { userName, avatar, title, content, img, favorited, position, comments, id, stickers, deletePost, admin, likePost } = props;
+  // console.log(position)
   
 
   
   const link = '/user/' + userName;
- //console.log(stickers)
+//  console.log(stickers)
   const postLink = '/post/' + id;
-  const defaultPosition = [
+  let defaultPosition = [
     [51.220152, 16.161984]
   ];
+  if(stickers instanceof Array){
+    if(stickers.length > 0 ) defaultPosition = [[Number(stickers[0].latitude), Number(stickers[0].longitude)]]  
+  }
+  
   let date;
   // console.log(content)
   if(content instanceof Date ) date = `${content.getDay()}.${content.getUTCMonth()}.${content.getFullYear()}`
-
+  
   return (
     <Card className={classes.card}>
       <CardHeader

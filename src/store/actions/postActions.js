@@ -24,6 +24,7 @@ export function sendPostRequested() {
 }
 
 export function getPostsDone(data) {
+  // console.log(data)
   return {
     type: 'GET_POSTS_DONE',
     payload: data
@@ -81,14 +82,16 @@ export function getPosts() {
 }
 
 export const sendPost = (data) => {
-  //console.log(data)
+  // console.log(data)
   return (dispatch, getState) => {
   dispatch(sendPostRequested());
+  const date = new Date();
+  const dateReq = `${date.getDate()}.${date.getUTCMonth()+1}.${date.getFullYear()}`
   //dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: 'Dodawanie postów aktualnie wyłączone' });
   axios.post(`${apiUrl}api/Posts`, {
       "Post": {
           "Title": data.title,
-          "Content": new Date(),
+          "Content": dateReq,
           "StickersData": [
             {
               "Name": data.title,
@@ -96,7 +99,7 @@ export const sendPost = (data) => {
               "Latitude": Number(data.lat),
               "Img": data.img,
               "TagList": [
-                ...data.tagList
+                'tag1', 'tag2'
               ]
             }
           ]
@@ -106,6 +109,7 @@ export const sendPost = (data) => {
     .then(function (res) {
         dispatch({ type: 'SEND_POST_DONE', res });
         dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: 'Post dodany' });
+        dispatch({ type: 'ADD_POST_MODAL_SWITCH', payload: false })
         //console.log(getState());
         return true
     }).catch(function (err) {

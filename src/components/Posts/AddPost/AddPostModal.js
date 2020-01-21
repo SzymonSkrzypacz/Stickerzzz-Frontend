@@ -88,7 +88,7 @@ class AddPost extends Component {
           lon: data[0].lon,
         })
         }
-        
+        // console.log(this.state)
     });
 
   }

@@ -107,7 +107,7 @@ const initState = {
      content: new Date(2020, 1, 21),
      img: 'https://membranarapgra.pl/pol_ps_Naklejka-samoprzylepna-Stoprocent-3D-Essa-czarna-34109_1.jpg',
      favorited: 21,
-     position: [[51.220152, 16.161984]],
+     position: [[52.2319581, 21.0067249]],
      comments: [
        {
          commentId: 6,
