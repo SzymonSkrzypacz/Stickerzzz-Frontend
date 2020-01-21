@@ -27,6 +27,7 @@ class Profile extends Component {
   render(){
     const { user, posts } = this.props;
     const canEdit = this.checkCanEdit();
+    console.log(user)
   return (
     <div className='width-450'>
       <Card className={classes.card} >
