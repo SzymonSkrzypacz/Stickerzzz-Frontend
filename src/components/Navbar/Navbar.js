@@ -33,6 +33,10 @@ const useStyles = makeStyles(theme => ({
   navMenu: {
     color: 'white',
     textDecoration: 'none'
+  },
+  navBlack: {
+    color: 'black',
+    textDecoration: 'none'
   }
 }));
 
@@ -206,21 +210,21 @@ const Navbar = ({ user, admin, logOut, getPosts, changeMode, mode }) => {
               open={open}
               onClose={handleClose}
             >
-              <Link className={classes.navMenu} to={`/postList`} >
-                <MenuItem className={classes.navMenu} onClick={handleClose}>
+              <Link className={classes.navBlack} to={`/postList`} >
+                <MenuItem className={classes.navBlack} onClick={handleClose}>
                   Posty
                 </MenuItem>
               </Link>
               {user && (
-              <Link className={classes.navMenu} to={`/myProfile`} >
-                <MenuItem className={classes.navMenu} onClick={handleClose}>
+              <Link className={classes.navBlack} to={`/myProfile`} >
+                <MenuItem className={classes.navBlack} onClick={handleClose}>
                   Mój profil
                 </MenuItem>
               </Link>
               )}
               {admin && ( 
-              <Link className={classes.navMenu} to={`/adminDashboard`} >
-                <MenuItem className={classes.navMenu} onClick={handleClose}>
+              <Link className={classes.navBlack} to={`/adminDashboard`} >
+                <MenuItem className={classes.navBlack} onClick={handleClose}>
                   Admin dashboard
                 </MenuItem>
               </Link>
