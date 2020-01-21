@@ -73,7 +73,7 @@ class Profile extends Component {
 const mapStateToProps = state => {
   return {
     user: state.users.users.filter(user => {
-      if(user.userName === window.location.href.slice(27)){
+      if(user.userName === window.location.href.slice((window.location.href.indexOf('user') + 5))){
         return user
       } else return null;
       }),  
