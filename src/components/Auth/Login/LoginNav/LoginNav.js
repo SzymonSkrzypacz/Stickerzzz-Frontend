@@ -21,6 +21,10 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  navLinks: {
+    color: 'white',
+    textDecoration: 'none',
+  },
 }));
 
 export default function Login() {
@@ -38,7 +42,7 @@ export default function Login() {
 
   return (
     <div>
-      <Button color='inherit' onClick={handleOpen}>
+      <Button color='inherit' className={classes.navLinks} onClick={handleOpen}>
         Login
       </Button>
       <Modal
@@ -48,7 +52,7 @@ export default function Login() {
         onClose={handleClose}
       >
         <div style={modalStyle} className={classes.paper}>
-          <SignIn />
+          <SignIn close={handleClose}/>
         </div>
       </Modal>
     </div>

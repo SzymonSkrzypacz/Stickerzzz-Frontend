@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import Avatar from '@material-ui/core/Avatar';
+// import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
+// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+// import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { signIn } from '../../../../store/actions/authActions';
 import { connect } from 'react-redux';
+import CloseIcon from '@material-ui/icons/Close';
 const styles = (theme => ({
   '@global': {
     body: {
@@ -31,6 +32,10 @@ const styles = (theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  navLinks: {
+    color: 'white',
+    textDecoration: 'none',
   },
 }));
 
@@ -59,12 +64,12 @@ state = {
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={styles.paper}>
-        <Avatar className={styles.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component='h1' variant='h5'>
-          Sign in
-        </Typography>
+      <Button
+            color='primary'
+            className={styles.submit}
+          >
+        <CloseIcon onClick={this.props.close}/>
+        </Button>
         <form className={styles.form} noValidate onSubmit={this.handleSubmit}>
           <TextField
             value={this.state.email}
@@ -97,7 +102,7 @@ state = {
             fullWidth
             variant='contained'
             color='primary'
-            className={styles.submit}
+            className={styles.navLinks}
           >
             Sign In
           </Button>

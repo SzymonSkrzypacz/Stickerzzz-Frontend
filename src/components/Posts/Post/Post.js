@@ -6,6 +6,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
+import Button from '@material-ui/core/Button';
 // import Dialog from '@material-ui/core/Dialog';
 // import DialogActions from '@material-ui/core/DialogActions';
 // import DialogContent from '@material-ui/core/DialogContent';
@@ -25,7 +26,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 // import TextField from '@material-ui/core/TextField';
 // import List from '@material-ui/core/List';
 import Comment from './Comment';
-import { deletePost } from '../../../store/actions/postActions';
+import { deletePost, likePost } from '../../../store/actions/postActions';
 import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
@@ -103,7 +104,7 @@ function Post(props) {
   // }
   //console.log(props)
   // const author = checkIsAuthorOrAdmin();
-  const { userName, avatar, title, content, img, favorited, position, comments, id, stickers, deletePost, admin } = props;
+  const { userName, avatar, title, content, img, favorited, position, comments, id, stickers, deletePost, admin, likePost } = props;
   
 
   
@@ -113,6 +114,9 @@ function Post(props) {
   const defaultPosition = [
     [51.220152, 16.161984]
   ];
+  let date;
+  // console.log(content)
+  if(content instanceof Date ) date = `${content.getDay()}.${content.getUTCMonth()}.${content.getFullYear()}`
 
   return (
     <Card className={classes.card}>
@@ -129,15 +133,15 @@ function Post(props) {
         }
         
         action={ admin && (
-
-             <DeleteIcon onClick={() => deletePost(id)}/>
-            
+          <Button>
+          <DeleteIcon onClick={() => deletePost(id)}/>
+          </Button>
             )
         }
         
         
         title={title}
-        subheader={content}
+        subheader={date || content}
       />
       
       <Link to={postLink} >
@@ -149,7 +153,7 @@ function Post(props) {
         </Typography>
       </CardContent> */}
       <CardActions disableSpacing>
-        <IconButton aria-label='like'>
+        <IconButton aria-label='like' onClick={() => likePost(id)}>
           <ThumbUpAltIcon />
         </IconButton>
         <Typography variant='body2' color='textSecondary' component='p'>
@@ -220,7 +224,8 @@ function Post(props) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deletePost: postId => dispatch(deletePost(postId))
+    deletePost: postId => dispatch(deletePost(postId)),
+    likePost: postId => dispatch(likePost(postId))
   }
 }
 

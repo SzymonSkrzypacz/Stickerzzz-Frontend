@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     textDecoration: 'none',
   },
   navMenu: {
-    color: 'black',
+    color: 'white',
     textDecoration: 'none'
   }
 }));
@@ -46,9 +46,9 @@ const Navbar = ({ user, admin, logOut, getPosts, changeMode, mode }) => {
   
 
   const resize = () => {
-    if (window.innerWidth <= 500) {
+    if (window.innerWidth <= 600) {
       changeMode('mobile');
-    } else if (window.innerWidth > 500) {
+    } else if (window.innerWidth > 600) {
       changeMode('desktop');
     } 
   };

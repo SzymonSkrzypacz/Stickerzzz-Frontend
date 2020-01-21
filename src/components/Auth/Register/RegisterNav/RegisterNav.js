@@ -23,6 +23,10 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  navLinks: {
+    color: 'white',
+    textDecoration: 'none',
+  },
 }));
 
 function Register(props) {
@@ -45,7 +49,7 @@ function Register(props) {
 //console.log(props.registerModal)
   return (
     <div>
-      <Button color='inherit' onClick={props.switchRegisterModalOpen} >
+      <Button color='inherit' className={classes.navLinks} onClick={props.switchRegisterModalOpen} >
         Register
       </Button>
       <Modal

@@ -7,7 +7,7 @@ import Container from '@material-ui/core/Container';
 import { green } from '@material-ui/core/colors';
 import { connect } from 'react-redux';
 import { sendPost } from '../../../store/actions/postActions';
-
+import CloseIcon from '@material-ui/icons/Close';
 
 
 const styles = theme => ({
@@ -17,7 +17,7 @@ const styles = theme => ({
     },
   },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -100,6 +100,12 @@ render(){
     return (
       <>
        <Container component='main' maxWidth='xs'>
+       <Button
+            color='primary'
+            className={styles.btn}
+          >
+         <CloseIcon onClick={this.props.close}/>
+        </Button>
         <CssBaseline />
         <div className={classes.paper}>
           <form
@@ -120,18 +126,7 @@ render(){
               name='title'
               autoFocus
             />
-            
-            <TextField
-              value={this.state.content}
-              onChange={this.handleChange}
-              variant='outlined'
-              margin='normal'
-              required
-              fullWidth
-              id='content'
-              label='Data'
-              name='content'
-            />
+
             
             <TextField
               value={this.state.img}
@@ -144,18 +139,7 @@ render(){
               label='Link do wlepy'
               name='img'
             />
-            
-            <TextField
-              value={this.state.tags}
-              onChange={this.handleChangeTags}
-              variant='outlined'
-              margin='normal'
-              required
-              fullWidth
-              id='tags'
-              label='Tagi'
-              name='tags'
-            />
+
             
             <TextField
               onChange={this.handleChangeAddress}

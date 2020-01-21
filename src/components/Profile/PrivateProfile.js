@@ -13,6 +13,7 @@ import Modal from '@material-ui/core/Modal';
 import EditProfileModal from './EditProfileModal';
 
 
+
 class PrivateProfile extends Component {
   
   

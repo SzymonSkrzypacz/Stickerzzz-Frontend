@@ -11,6 +11,10 @@ import { connect } from 'react-redux'
 import * as actions from './store/actions/postActions';
 import SimpleSnackBar from './components/Snackbar/Snackbar';
 import PrivateProfile from './components/Profile/PrivateProfile';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { lightBlue, pink } from '@material-ui/core/colors';
+
+
 
 class App extends Component {
   
@@ -18,10 +22,18 @@ class App extends Component {
   //   const { getPosts } = this.props;
   //   getPosts();
   // }
+  theme = createMuiTheme({
+      palette: {
+        primary: lightBlue,
+        secondary: pink,
+      },
+      
+  });
   
   render() {
     const { admin, user } = this.props;
     return (
+      <ThemeProvider theme={this.theme}>
       <BrowserRouter>
         <Navbar />
         <Route exact path='/' component={MainPage} />
@@ -32,6 +44,7 @@ class App extends Component {
         <Route path='/post/:id' component={SinglePost} />
         <SimpleSnackBar />
       </BrowserRouter>
+      </ThemeProvider>
     );
   }
 }

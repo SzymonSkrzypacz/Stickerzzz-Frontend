@@ -4,16 +4,13 @@ import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
-import { green } from '@material-ui/core/colors';
 import { connect } from 'react-redux';
 
 
-
-
-const styles = theme => ({
+const styles = (theme => ({
   '@global': {
     body: {
-      backgroundColor: 'theme.palette.common.white',
+      backgroundColor: 'theme.palette.common.white ',
     },
   },
   paper: {
@@ -27,16 +24,17 @@ const styles = theme => ({
     backgroundColor: '#282C34',
   },
   form: {
-    width: '100%',
+    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  success: {
-    backgroundColor: green[600],
+  navLinks: {
+    color: 'white',
+    textDecoration: 'none',
   },
-});
+}));
 
 class EditProfileModal extends Component {
   state = {
@@ -62,14 +60,13 @@ class EditProfileModal extends Component {
   
 render(){
   //  const { openModal, switchEditProfileModalModalOpen, switchEditProfileModalModalClose } = this.props;
-  const { classes } = this.props;
     return (
-      <>
+      
        <Container component='main' maxWidth='xs'>
         <CssBaseline />
-        <div className={classes.paper}>
+        <div className={styles.paper}>
           <form
-            className={classes.form}
+            className={styles.form}
             onSubmit={this.handleSubmit}
         
           >
@@ -104,14 +101,14 @@ render(){
               fullWidth
               variant='contained'
               color='primary'
-              className={classes.submit}
+              className={styles.submit}
             >
               Edytuj profil!
             </Button>
           </form>
         </div>
       </Container>
-      </>
+      
   );
 }
   

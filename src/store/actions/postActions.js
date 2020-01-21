@@ -9,6 +9,7 @@ export const SEND_POST_FAILED = 'SEND_POST_FAILED';
 export const SEND_POST_REQUESTED = 'SEND_POST_REQUESTED';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const DELETE_POST = 'DELETE_POST';
+export const LIKE_POST = 'LIKE_POST';
 
 export function getPostsRequested() {
   return {
@@ -54,6 +55,14 @@ export function deletePost(postId) {
   };
 }
 
+export function likePost(postId) {
+  //dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: 'Dodawanie postów aktualnie wyłączone' });
+  return dispatch => {
+    dispatch({ type: 'LIKE_POST', postId });
+    dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: 'Zostawiłeś like!' });
+  };
+}
+
 export function getPosts() {
   return dispatch => {
     // set state to "loading"
@@ -72,14 +81,14 @@ export function getPosts() {
 }
 
 export const sendPost = (data) => {
-  console.log(data)
+  //console.log(data)
   return (dispatch, getState) => {
   dispatch(sendPostRequested());
   //dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: 'Dodawanie postów aktualnie wyłączone' });
   axios.post(`${apiUrl}api/Posts`, {
       "Post": {
           "Title": data.title,
-          "Content": data.content,
+          "Content": new Date(),
           "StickersData": [
             {
               "Name": data.title,
@@ -102,7 +111,7 @@ export const sendPost = (data) => {
     }).catch(function (err) {
         console.log(err.message)
         dispatch({ type: 'SEND_POST_FAILED', err });
-        dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: 'Post nie został dodany' });
+        dispatch({ type: 'REGISTER_NOTIFICATION_SWITCH', payload: true, text: 'Błąd serwera' });
         return false
     });
 

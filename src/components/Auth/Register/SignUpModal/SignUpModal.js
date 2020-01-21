@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import Avatar from '@material-ui/core/Avatar';
+// import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { signUp, clearError } from '../../../../store/actions/authActions';
 import { errorPassword, correctPassword, errorEmail, correctEmail, errorUserName, correctUserName } from '../../../../store/actions/validateActions';
 import { green } from '@material-ui/core/colors';
-
+import CloseIcon from '@material-ui/icons/Close';
 import { connect } from 'react-redux';
 
 
@@ -21,7 +21,7 @@ const styles = theme => ({
     },
   },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -40,6 +40,9 @@ const styles = theme => ({
   success: {
     backgroundColor: green[600],
   },
+  btn: {
+    float: 'left'
+  }
 });
 
 const input_fields = {
@@ -95,13 +98,14 @@ class signUpModal extends Component {
     return (
       <Container component='main' maxWidth='xs'>
         <CssBaseline />
+        <Button
+            color='primary'
+            className={styles.btn}
+          >
+         <CloseIcon onClick={this.props.close}/>
+        </Button>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component='h1' variant='h5'>
-            Sign up
-          </Typography>
+        
           <form
             className={classes.form}
             onSubmit={this.handleSubmit}
